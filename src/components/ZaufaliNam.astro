@@ -1,0 +1,88 @@
+---
+const clients = [
+  { src: '/images/impulso.jpeg', alt: 'Impulso' },
+  { src: '/images/mpk-radomsko.jpeg', alt: 'MPK Radomsko' },
+  { src: '/images/warta-sa.jpeg', alt: 'Warta SA' },
+];
+---
+
+<section class="zaufali" id="zaufali-nam">
+  <div class="container">
+    <div class="zaufali-inner">
+      <div class="zaufali-header reveal">
+        <span class="section-label">Referencje</span>
+        <h2 class="section-title">Zaufali nam</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="clients-row">
+        {clients.map((client, i) => (
+          <div class={`client-card reveal scale-in delay-${i + 1}`}>
+            <img src={client.src} alt={client.alt} width="190" height="130" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .zaufali {
+    padding: 80px 0;
+    background: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .zaufali-inner {
+    text-align: center;
+  }
+
+  .zaufali-header {
+    margin-bottom: 48px;
+  }
+
+  .zaufali-header .section-divider {
+    margin: 0 auto 24px;
+  }
+
+  .clients-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .client-card {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .client-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+  }
+
+  .client-card img {
+    width: 170px;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(30%);
+    transition: filter 0.3s;
+  }
+
+  .client-card:hover img {
+    filter: grayscale(0%);
+  }
+
+  @media (max-width: 600px) {
+    .clients-row { gap: 16px; }
+    .client-card { padding: 16px 20px; }
+    .client-card img { width: 140px; }
+  }
+</style>

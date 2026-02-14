@@ -1,0 +1,284 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Kancelaria Prawa Gospodarczego i Ubezpieczeniowego Radosław Pacud - Prowadzimy kompleksową obsługę przedsiębiorstw krajowych oraz obrotu zagranicznego w języku polskim i angielskim." />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Multi-layer obfuscation for sensitive data
+      function decodeSensitive() {
+        document.querySelectorAll('.protected-email').forEach((el) => {
+          const encoded = el.getAttribute('data-ref');
+          if (!encoded) return;
+          let decoded = '';
+          try { decoded = atob(encoded); } catch { return; }
+          const realSpan = el.querySelector('.email-real');
+          if (realSpan) realSpan.textContent = decoded;
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'mai' + 'lto' + ':' + decoded;
+          });
+          el.removeAttribute('data-ref');
+          el.setAttribute('href', '#');
+        });
+
+        document.querySelectorAll('.protected-phone').forEach((el) => {
+          const encoded = el.getAttribute('data-ref');
+          if (!encoded) return;
+          let decoded = '';
+          try { decoded = atob(encoded); } catch { return; }
+          const realSpan = el.querySelector('.phone-real');
+          if (realSpan) realSpan.textContent = decoded;
+          el.removeAttribute('data-ref');
+        });
+      }
+
+      if (document.readyState === 'complete') {
+        setTimeout(decodeSensitive, 800);
+      } else {
+        window.addEventListener('load', () => setTimeout(decodeSensitive, 800));
+      }
+
+      // Scroll reveal animations
+      const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      });
+    </script>
+    <style is:global>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --color-primary: #ba9a6c;
+        --color-primary-dark: #a38656;
+        --color-accent: #1c86c6;
+        --color-accent-dark: #156da3;
+        --color-navy: #01023b;
+        --color-navy-light: #0a0b52;
+        --color-text: #2d2d3a;
+        --color-text-light: #6b7280;
+        --color-bg: #ffffff;
+        --color-bg-alt: #f8f9fc;
+        --color-bg-dark: #0c0d2b;
+        --color-border: #e5e7eb;
+        --font-heading: 'Plus Jakarta Sans', sans-serif;
+        --font-body: 'Inter', sans-serif;
+        --radius-sm: 6px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+        --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+        --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+        --shadow-glow: 0 0 30px rgba(186,154,108,0.15);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--color-text);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        line-height: 1.25;
+        color: var(--color-navy);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Section title styling */
+      .section-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--color-primary);
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: var(--color-navy);
+        margin-bottom: 16px;
+      }
+
+      .section-divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+        border-radius: 2px;
+        margin: 0 0 24px;
+      }
+
+      .section-divider.center {
+        margin: 0 auto 24px;
+      }
+
+      /* Scroll reveal animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.delay-1 { transition-delay: 0.1s; }
+      .reveal.delay-2 { transition-delay: 0.2s; }
+      .reveal.delay-3 { transition-delay: 0.3s; }
+      .reveal.delay-4 { transition-delay: 0.4s; }
+
+      .reveal.from-left {
+        transform: translateX(-40px);
+      }
+
+      .reveal.from-right {
+        transform: translateX(40px);
+      }
+
+      .reveal.scale-in {
+        transform: scale(0.92);
+      }
+
+      .revealed {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      /* Email honeypot */
+      .email-trap {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        padding: 0;
+        margin: -1px;
+      }
+
+      .email-wrap a,
+      .protected-email {
+        color: var(--color-accent);
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .email-wrap a:hover,
+      .protected-email:hover {
+        color: var(--color-primary);
+      }
+
+      /* Modern button base */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        font-family: var(--font-heading);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(186,154,108,0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(186,154,108,0.4);
+      }
+
+      .btn-accent {
+        background: var(--color-accent);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(28,134,198,0.3);
+      }
+
+      .btn-accent:hover {
+        background: var(--color-accent-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(28,134,198,0.4);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #fff;
+        border: 2px solid rgba(255,255,255,0.3);
+      }
+
+      .btn-outline:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: #fff;
+        transform: translateY(-2px);
+      }
+    </style>
+  </body>
+</html>

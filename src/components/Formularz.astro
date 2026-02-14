@@ -1,0 +1,206 @@
+---
+---
+
+<section class="formularz" id="formularz">
+  <div class="formularz-bg"></div>
+  <div class="container formularz-grid">
+    <div class="formularz-info reveal from-left">
+      <span class="section-label" style="color: rgba(186,154,108,0.8);">Napisz do nas</span>
+      <h2 class="formularz-title">Formularz kontaktowy</h2>
+      <p class="formularz-desc">
+        Zostaw nam swoją wiadomość, a odpowiemy tak szybko jak to tylko będzie możliwe.
+      </p>
+      <div class="formularz-divider"></div>
+      <div class="formularz-trust">
+        <div class="trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Poufność gwarantowana</span>
+        </div>
+        <div class="trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          <span>Odpowiedź w 24h</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="formularz-form reveal from-right" method="post" action="#">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="imie">Imię <span class="required">*</span></label>
+          <input type="text" id="imie" name="imie" placeholder="Jan" required />
+        </div>
+        <div class="form-group">
+          <label for="nazwisko">Nazwisko <span class="required">*</span></label>
+          <input type="text" id="nazwisko" name="nazwisko" placeholder="Kowalski" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="telefon">Telefon <span class="required">*</span></label>
+        <input type="tel" id="telefon" name="telefon" placeholder="+48 ..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail <span class="required">*</span></label>
+        <input type="email" id="email" name="email" placeholder="jan@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="wiadomosc">Wiadomość <span class="required">*</span></label>
+        <textarea id="wiadomosc" name="wiadomosc" rows="4" placeholder="W czym możemy pomóc?" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-submit">
+        Wyślij wiadomość
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .formularz {
+    position: relative;
+    padding: 100px 0;
+    background: var(--color-navy);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .formularz-bg {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(186,154,108,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .formularz-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .formularz-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .formularz-desc {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .formularz-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--color-primary);
+    margin: 28px 0;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+  }
+
+  .trust-item svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .formularz-form {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .required {
+    color: var(--color-primary);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 32px;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 860px) {
+    .formularz-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .formularz-form {
+      padding: 28px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .formularz { padding: 72px 0; }
+  }
+</style>

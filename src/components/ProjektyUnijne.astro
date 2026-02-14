@@ -1,0 +1,225 @@
+---
+---
+
+<section class="projekty" id="projekty-unijne">
+  <div class="container">
+    <!-- Header centered -->
+    <div class="projekty-header reveal">
+      <span class="section-label">Dofinansowanie UE</span>
+      <h2 class="section-title">Projekty unijne</h2>
+      <div class="section-divider center"></div>
+    </div>
+
+    <!-- Banner -->
+    <div class="projekty-banner-wrap reveal delay-1">
+      <img src="/images/projekty-unijne.png" alt="Projekty unijne" width="1024" height="378" loading="lazy" />
+    </div>
+
+    <!-- Content layout -->
+    <div class="projekty-layout">
+      <!-- Left: project info -->
+      <div class="projekty-info reveal from-left">
+        <div class="info-card">
+          <div class="info-label">Beneficjent / Partner w Konsorcjum B+R</div>
+          <p class="info-partner">z INFOJURA Sp. z o.o.</p>
+          <div class="info-divider"></div>
+          <p class="info-name">
+            <strong>Kancelaria Prawa Gospodarczego<br />i Ubezpieczeniowego<br />Radosław Pacud</strong>
+          </p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-value">1 221 099</span>
+            <span class="stat-unit">PLN</span>
+            <span class="stat-label">Wydatki kwalifikowane</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">264 391</span>
+            <span class="stat-unit">PLN</span>
+            <span class="stat-label">Wartość partnera</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">118 799</span>
+            <span class="stat-unit">PLN</span>
+            <span class="stat-label">Dofinansowanie</span>
+          </div>
+        </div>
+
+        <div class="period-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Okres realizacji: <strong>2022-01-01 — 2023-12-31</strong></span>
+        </div>
+      </div>
+
+      <!-- Right: description -->
+      <div class="projekty-desc reveal from-right">
+        <div class="desc-card">
+          <h3>Cel projektu</h3>
+          <p>
+            Projekt dotyczy przeprowadzenia prac przemysłowych oraz rozwojowych celem
+            stworzenia rozwiązań informatycznych umożliwiających automatyczną anonimizację
+            danych osobowych (privacy by default) w zakresie przetwarzania dokumentów cyfrowych.
+          </p>
+        </div>
+        <img src="/images/projekty-unijne-2.png" alt="Dofinansowanie UE" class="eu-banner" width="1024" height="74" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projekty {
+    padding: 120px 0;
+    background: var(--color-bg);
+  }
+
+  .projekty-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .projekty-banner-wrap {
+    margin-bottom: 64px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .projekty-banner-wrap img {
+    width: 100%;
+    display: block;
+  }
+
+  .projekty-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .info-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+
+  .info-partner {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+
+  .info-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--color-border);
+    margin: 20px 0;
+  }
+
+  .info-name {
+    color: var(--color-navy);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    padding: 20px 14px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .stat:hover {
+    transform: translateY(-2px);
+  }
+
+  .stat-value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
+
+  .stat-unit {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--color-text-light);
+    margin-top: 6px;
+  }
+
+  .period-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    padding: 14px 18px;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-primary);
+  }
+
+  .period-badge svg {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+
+  .desc-card {
+    background: var(--color-navy);
+    color: rgba(255,255,255,0.85);
+    padding: 40px;
+    border-radius: var(--radius-md);
+    margin-bottom: 32px;
+  }
+
+  .desc-card h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  .desc-card p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .eu-banner {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 860px) {
+    .projekty { padding: 80px 0; }
+    .projekty-layout { grid-template-columns: 1fr; gap: 32px; }
+    .stats-row { grid-template-columns: 1fr; }
+    .projekty-banner-wrap { margin-bottom: 40px; }
+    .desc-card { padding: 28px; }
+  }
+</style>

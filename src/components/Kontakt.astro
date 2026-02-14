@@ -1,0 +1,190 @@
+---
+---
+
+<section class="kontakt" id="kontakt">
+  <div class="container">
+    <div class="kontakt-cta reveal">
+      <span class="section-label">Porozmawiajmy</span>
+      <h2 class="section-title">Nie zwlekaj z kontaktem</h2>
+      <div class="section-divider center"></div>
+    </div>
+
+    <div class="kontakt-grid">
+      <div class="kontakt-person reveal from-left">
+        <div class="person-photo-wrap">
+          <img src="/images/radoslaw-pacud.jpeg" alt="Radosław Pacud" width="232" height="285" loading="lazy" />
+          <div class="person-glow"></div>
+        </div>
+        <h3>Zapraszam<br />do współpracy!</h3>
+        <p class="person-title">Dr Hab. Radosław Pacud</p>
+        <p class="person-role">prof. UE Katowice, radca prawny</p>
+      </div>
+
+      <div class="kontakt-dane reveal delay-1">
+        <h3>Dane adresowe</h3>
+        <p class="kancelaria-name">
+          Kancelaria Prawa Gospodarczego<br />i Ubezpieczeniowego<br />Radosław Pacud
+        </p>
+        <div class="section-divider"></div>
+        <ul class="kontakt-list">
+          <li>
+            <div class="kontakt-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span>ul. Kopernika 42 lok. 1<br />42-200 Częstochowa</span>
+          </li>
+          <li>
+            <div class="kontakt-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span class="protected-phone" data-ref="KzQ4IDM0IDMyNCAyMiA0Mg=="><span class="email-trap" aria-hidden="true">+48 00 000 00 00</span>tel./fax: <span class="phone-real"></span></span>
+          </li>
+          <li>
+            <div class="kontakt-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <span>Email: <span class="email-wrap"><a class="protected-email" href="/contact" data-ref="a2FuY2VsYXJpYUBwYWN1ZC5wbA=="><span class="email-trap" aria-hidden="true">contact@fake-domain.com</span><span class="email-real"></span></a></span></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="kontakt-mapa reveal from-right">
+        <iframe
+          src="https://maps.google.com/maps?q=ul.%20Kopernika%2042%20lok.%201%2C%2042-200%20Cz%C4%99stochowa&t=m&z=15&output=embed&iwloc=near"
+          title="Lokalizacja kancelarii"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kontakt {
+    padding: 100px 0;
+    background: var(--color-bg);
+  }
+
+  .kontakt-cta {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .kontakt-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .kontakt-person {
+    text-align: center;
+  }
+
+  .person-photo-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .person-photo-wrap img {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .person-glow {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 40px;
+    background: var(--color-primary);
+    filter: blur(24px);
+    opacity: 0.25;
+    border-radius: 50%;
+  }
+
+  .kontakt-person h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .person-title {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .person-role {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+  }
+
+  .kontakt-dane h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .kancelaria-name {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .kontakt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .kontakt-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .kontakt-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+  }
+
+  .kontakt-mapa iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    border: 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 960px) {
+    .kontakt-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .kontakt-mapa iframe {
+      min-height: 280px;
+    }
+
+    .kontakt { padding: 72px 0; }
+  }
+</style>
