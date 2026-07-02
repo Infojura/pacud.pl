@@ -1,0 +1,183 @@
+---
+// Placeholdery — podmień `title`, `subtitle` oraz (opcjonalnie) `cover`
+// na prawdziwe dane. Gdy podasz plik okładki, ustaw np. cover: '/images/ksiazka-1.jpg'.
+const books = [
+  {
+    title: 'Tytuł publikacji I',
+    subtitle: 'Prawo gospodarcze',
+    year: '2023',
+    cover: '',
+  },
+  {
+    title: 'Tytuł publikacji II',
+    subtitle: 'Prawo ubezpieczeniowe',
+    year: '2021',
+    cover: '',
+  },
+  {
+    title: 'Tytuł publikacji III',
+    subtitle: 'Ochrona danych osobowych',
+    year: '2019',
+    cover: '',
+  },
+];
+---
+
+<section class="publikacje" id="publikacje">
+  <div class="container">
+    <div class="publikacje-header reveal">
+      <span class="section-label">Dorobek</span>
+      <h2 class="section-title">Publikacje</h2>
+      <div class="section-divider center"></div>
+      <p class="publikacje-lead">
+        Wiedzę i doświadczenie dzielimy również na kartach książek oraz opracowań
+        naukowych z zakresu prawa gospodarczego i ubezpieczeniowego.
+      </p>
+    </div>
+
+    <div class="books-grid">
+      {books.map((book, i) => (
+        <article class={`book-card reveal delay-${i + 1}`}>
+          <div class="book-cover">
+            {book.cover
+              ? <img src={book.cover} alt={book.title} loading="lazy" />
+              : (
+                <div class="book-cover-placeholder">
+                  <span class="book-spine"></span>
+                  <span class="book-cover-label">{book.subtitle}</span>
+                  <span class="book-cover-title">{book.title}</span>
+                </div>
+              )}
+          </div>
+          <div class="book-info">
+            <h3>{book.title}</h3>
+            <span class="book-meta">{book.subtitle} · {book.year}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .publikacje {
+    padding: 120px 0;
+    background: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .publikacje-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .publikacje-lead {
+    max-width: 620px;
+    margin: 4px auto 0;
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .book-cover {
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .book-card:hover .book-cover {
+    transform: translateY(-8px) rotate(-1deg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .book-cover-placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 28px 22px;
+    background: linear-gradient(150deg, var(--color-navy), var(--color-navy-light));
+    color: #fff;
+  }
+
+  .book-spine {
+    position: absolute;
+    top: 0;
+    left: 14px;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--color-primary), transparent);
+    opacity: 0.6;
+  }
+
+  .book-cover-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .book-cover-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #fff;
+  }
+
+  .book-info {
+    margin-top: 20px;
+  }
+
+  .book-info h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 4px;
+  }
+
+  .book-meta {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+
+  @media (max-width: 768px) {
+    .publikacje { padding: 80px 0; }
+    .publikacje-header { margin-bottom: 40px; }
+    .books-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 260px;
+    }
+  }
+</style>
