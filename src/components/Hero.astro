@@ -42,21 +42,23 @@
   .hero {
     position: relative;
     background-color: var(--color-navy);
-    background-image: url("/images/radoslaw-pacud2.jpg");
-    background-position: center center;
+    background-image: url("/images/rpacud-4.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: right 6%;
     overflow: hidden;
   }
 
+  /* Przyciemnienie lewej strony — pod tekstem, z odsłonięciem postaci po prawej */
   .hero-bg-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      135deg,
-      rgba(1, 2, 59, 0.5) 0%,
-      rgba(1, 2, 59, 0.35) 50%,
-      rgba(10, 11, 82, 0.45) 100%
+      90deg,
+      rgba(1, 2, 59, 0.94) 0%,
+      rgba(1, 2, 59, 0.82) 35%,
+      rgba(1, 2, 59, 0.45) 60%,
+      rgba(1, 2, 59, 0.12) 100%
     );
   }
 
@@ -107,18 +109,18 @@
   .hero-container {
     position: relative;
     z-index: 1;
-    max-width: 900px;
+    max-width: 1200px;
     min-height: 100vh;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    padding: 0 24px;
+    justify-content: flex-start;
+    padding: 120px 24px;
   }
 
   .hero-content {
-    text-align: center;
-    width: 100%;
-    padding: 100px 0;
+    text-align: left;
+    max-width: 580px;
   }
 
   .hero-badge {
@@ -160,7 +162,7 @@
   }
 
   .hero-divider {
-    text-align: center;
+    text-align: left;
     padding: 4px 0;
     animation: fadeIn 0.6s ease-out 0.9s both;
   }
@@ -186,7 +188,7 @@
   .hero-actions {
     display: flex;
     gap: 16px;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     animation: fadeInUp 0.6s ease-out 1.1s both;
   }
@@ -227,18 +229,34 @@
     50% { opacity: 1; transform: scaleY(1.2); }
   }
 
+  @media (max-width: 960px) {
+    .hero {
+      background-position: 68% 6%;
+    }
+    .hero-bg-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(1, 2, 59, 0.78) 0%,
+        rgba(1, 2, 59, 0.72) 55%,
+        rgba(1, 2, 59, 0.82) 100%
+      );
+    }
+    .hero-container {
+      justify-content: center;
+      min-height: 100svh;
+      padding: 130px 24px 90px;
+    }
+    .hero-content { text-align: center; max-width: 640px; }
+    .hero-badge { margin-left: auto; margin-right: auto; }
+    .hero-divider { text-align: center; }
+    .hero-actions { justify-content: center; }
+  }
+
   @media (max-width: 768px) {
-    .hero-container { min-height: 100svh; }
-    .hero-content { padding: 80px 0; }
     .hero-badge { font-size: 0.6rem; letter-spacing: 1.5px; }
     .hero-subtitle { font-size: 0.9rem; letter-spacing: 2px; }
     .hero-actions { flex-direction: column; align-items: center; }
     .hero-actions .btn { width: 100%; max-width: 280px; justify-content: center; }
-  }
-
-  @media (min-width: 1025px) {
-    .hero {
-      background-attachment: fixed;
-    }
+    .hero-scroll-indicator { display: none; }
   }
 </style>

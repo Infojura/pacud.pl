@@ -39,18 +39,13 @@ const partners = [
     linkText: 'anonyme.pl',
   },
   {
-    src: '/images/ibk_logo.png',
-    alt: 'IBK24',
-    label: 'Partner technologiczny w zakresie zarządzania Kancelarią Prawną',
+    logos: [
+      { src: '/images/infojura-logo.png', alt: 'Infojura' },
+      { src: '/images/ibk_logo.png', alt: 'IBK24' },
+    ],
+    label: 'Partner technologiczny — Infojura IBK, aplikacja do zarządzania kancelarią prawną',
     href: 'https://www.ibk24.com',
     linkText: 'ibk24.com',
-  },
-  {
-    src: '/images/infojura-logo.png',
-    alt: 'Infojura',
-    label: 'Partner technologiczny - IBK, zarządzanie kancelarią prawną',
-    href: 'https://infojura.eu',
-    linkText: 'infojura.eu',
   },
 ];
 ---
@@ -98,7 +93,9 @@ const partners = [
           {partners.map((p) => (
             <div class="partner-item">
               <div class="partner-logo">
-                <img src={p.src} alt={p.alt} loading="lazy" />
+                {p.logos
+                  ? p.logos.map((l) => <img src={l.src} alt={l.alt} loading="lazy" />)
+                  : <img src={p.src} alt={p.alt} loading="lazy" />}
               </div>
               <div class="partner-meta">
                 <span class="partner-label">{p.label}</span>
@@ -239,6 +236,7 @@ const partners = [
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 18px;
   }
 
   .partner-logo img {

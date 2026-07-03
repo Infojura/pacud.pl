@@ -14,7 +14,7 @@ const areas = [
 const books = [
   {
     title: 'System prawa ubezpieczeń społecznych. Część ogólna',
-    subtitle: 'Prawo ubezpieczeń społecznych',
+    subtitle: 'Prawo pracy i ubezpieczeń społecznych',
     cover: '/images/ksiazka.png',
   },
   {
@@ -24,9 +24,18 @@ const books = [
   },
   {
     title: 'Prawne mechanizmy przekazywania środków OFE. Oceny konstytucyjno-prawne',
-    subtitle: 'Ubezpieczenia emerytalne',
+    subtitle: 'Prawo konstytucyjne',
     cover: '/images/ksiazka3.png',
   },
+];
+
+// Kolejne publikacje ładowane po kliknięciu „Zobacz więcej".
+// Ten sam format co `books` — dopisuj: { title, subtitle, cover }.
+// (Na razie dane testowe — powtórzone książki z okładkami.)
+const morePublications = [
+  { title: 'System prawa ubezpieczeń społecznych. Część ogólna', subtitle: 'Prawo pracy i ubezpieczeń społecznych', cover: '/images/ksiazka.png' },
+  { title: 'Ustrój finansowy systemu ubezpieczeń społecznych', subtitle: 'Prawo finansowe', cover: '/images/ksiazka2.png' },
+  { title: 'Prawne mechanizmy przekazywania środków OFE. Oceny konstytucyjno-prawne', subtitle: 'Prawo konstytucyjne', cover: '/images/ksiazka3.png' },
 ];
 ---
 
@@ -83,8 +92,64 @@ const books = [
         </article>
       ))}
     </div>
+
+    {morePublications.length > 0 && (
+      <>
+        <div class="more-pubs" id="more-pubs" hidden>
+          <div class="books-grid">
+            {morePublications.map((book) => (
+              <article class="book-card">
+                <div class="book-cover">
+                  {book.cover
+                    ? <img src={book.cover} alt={book.title} loading="lazy" />
+                    : (
+                      <div class="book-cover-placeholder">
+                        <span class="book-spine"></span>
+                        <span class="book-cover-label">{book.subtitle}</span>
+                        <span class="book-cover-title">{book.title}</span>
+                      </div>
+                    )}
+                </div>
+                <div class="book-info">
+                  <h3>{book.title}</h3>
+                  <span class="book-meta">{book.subtitle}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="more-toggle reveal">
+          <button type="button" class="btn btn-primary" id="more-pubs-btn" aria-expanded="false" aria-controls="more-pubs">
+            <span class="more-pubs-label">Zobacz więcej</span>
+            <svg class="more-pubs-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+      </>
+    )}
   </div>
 </section>
+
+<script>
+  const btn = document.getElementById('more-pubs-btn');
+  const panel = document.getElementById('more-pubs');
+  const label = btn?.querySelector('.more-pubs-label');
+
+  btn?.addEventListener('click', () => {
+    const willShow = panel?.hasAttribute('hidden');
+    if (willShow) {
+      panel?.removeAttribute('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.classList.add('is-open');
+      if (label) label.textContent = 'Zwiń';
+    } else {
+      panel?.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('is-open');
+      if (label) label.textContent = 'Zobacz więcej';
+    }
+  });
+</script>
 
 <style>
   .publikacje {
@@ -280,6 +345,25 @@ const books = [
   .book-meta {
     font-size: 0.85rem;
     color: var(--color-text-light);
+  }
+
+  /* Rozwijana sekcja kolejnych publikacji */
+  .more-pubs {
+    margin-top: 40px;
+  }
+
+  .more-toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  .more-pubs-chevron {
+    transition: transform 0.3s ease;
+  }
+
+  #more-pubs-btn.is-open .more-pubs-chevron {
+    transform: rotate(180deg);
   }
 
   @media (max-width: 768px) {

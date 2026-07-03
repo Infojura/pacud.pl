@@ -4,12 +4,6 @@
 // 1. Wejdź na https://web3forms.com, podaj e-mail sekretariat@pacud.pl i skopiuj Access Key.
 // 2. Wklej klucz poniżej w miejsce PLACEHOLDER.
 const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
-
-// reCAPTCHA v2 — poniżej klucz TESTOWY Google (widżet się wyświetla i zawsze przechodzi).
-// Przy publikacji:
-//   1. Zarejestruj domenę pacud.pl na https://www.google.com/recaptcha/admin → dostaniesz site key + secret key.
-//   2. Wklej site key poniżej, a secret key wprowadź w panelu Web3Forms (włącz tam weryfikację reCAPTCHA).
-const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 ---
 
 <section class="formularz" id="formularz">
@@ -67,7 +61,14 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
         <textarea id="wiadomosc" name="wiadomosc" rows="4" placeholder="W czym możemy pomóc?" required></textarea>
       </div>
 
-      <div class="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY}></div>
+      <div class="form-consent">
+        <input type="checkbox" id="zgoda" name="zgoda" value="tak" required />
+        <label for="zgoda">
+          Wyrażam zgodę na przetwarzanie moich danych osobowych w celu obsługi zapytania
+          oraz akceptuję <a href="/polityka-prywatnosci" target="_blank" rel="noopener noreferrer">politykę prywatności</a>.
+          <span class="required">*</span>
+        </label>
+      </div>
 
       <button type="submit" class="btn btn-primary btn-submit">
         Wyślij wiadomość
@@ -79,8 +80,6 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
   </div>
 </section>
 
-<script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
-
 <script>
   const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status');
@@ -89,10 +88,10 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     e.preventDefault();
     if (!status) return;
 
-    // Weryfikacja reCAPTCHA (jeśli widżet jest załadowany)
-    const grecaptcha = (window as any).grecaptcha;
-    if (grecaptcha && typeof grecaptcha.getResponse === 'function' && !grecaptcha.getResponse()) {
-      status.textContent = 'Potwierdź, że nie jesteś robotem.';
+    // Wymagana zgoda na przetwarzanie danych
+    const consent = form.querySelector('#zgoda') as HTMLInputElement | null;
+    if (consent && !consent.checked) {
+      status.textContent = 'Aby wysłać wiadomość, zaakceptuj politykę prywatności.';
       status.className = 'form-status error';
       return;
     }
@@ -123,7 +122,6 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
       status.className = 'form-status error';
     } finally {
       if (submitBtn) submitBtn.disabled = false;
-      if (grecaptcha && typeof grecaptcha.reset === 'function') grecaptcha.reset();
     }
   });
 </script>
@@ -250,8 +248,32 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     min-height: 100px;
   }
 
-  .g-recaptcha {
+  .form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
     margin-bottom: 20px;
+  }
+
+  .form-consent input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  .form-consent label {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+  }
+
+  .form-consent a {
+    color: var(--color-primary);
+    text-decoration: underline;
   }
 
   .btn-submit {

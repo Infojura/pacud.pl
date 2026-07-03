@@ -34,18 +34,24 @@
     <div class="footer-col">
       <h4>Nawigacja</h4>
       <ul class="footer-nav">
-        <li><a href="#oferta">Oferta</a></li>
-        <li><a href="#projekty-unijne">Projekty unijne</a></li>
-        <li><a href="#zaufali-nam">Zaufali nam</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="#formularz">Formularz</a></li>
+        <li><a href="/#oferta">Oferta</a></li>
+        <li><a href="/#projekty-unijne">Projekty unijne</a></li>
+        <li><a href="/#zaufali-nam">Zaufali nam</a></li>
+        <li><a href="/#kontakt">Kontakt</a></li>
+        <li><a href="/#formularz">Formularz</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <p>&copy; 2026 KPGIU Radosław Pacud. Wszelkie prawa zastrzeżone.</p>
+      <div class="footer-legal">
+        <p>&copy; 2026 KPGIU Radosław Pacud. Wszelkie prawa zastrzeżone.</p>
+        <span class="footer-legal-links">
+          <a href="/polityka-prywatnosci">Polityka prywatności</a>
+          <a href="/regulamin">Regulamin</a>
+        </span>
+      </div>
       <div class="footer-social">
         <a href="https://www.linkedin.com/company/kancelaria-prawa-gospodarczego-i-ubezpieczeniowego/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 448 512" fill="currentColor" width="14" height="14"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
@@ -147,6 +153,28 @@
     gap: 16px;
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .footer-legal-links {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-legal-links a {
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s;
+  }
+
+  .footer-legal-links a:hover {
+    color: var(--color-primary);
   }
 
   .footer-social {
