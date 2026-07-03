@@ -2,32 +2,30 @@
 // Dziedziny prawa — do każdej pozycji zostanie dołączony osobny plik/wykaz publikacji.
 // Gdy otrzymasz plik, ustaw `file: '/pliki/nazwa.pdf'` — wtedy pojawi się przycisk pobrania.
 const areas = [
-  { title: 'Praca, Prawo Pracy i Ubezpieczeń Społecznych', file: '' },
-  { title: 'Finanse i Prawo Finansowe', file: '' },
-  { title: 'Informatyka i Prawo informatyczne', file: '' },
-  { title: 'Ubezpieczenia i Prawo ubezpieczeniowe', file: '' },
+  { title: 'Praca | Prawo pracy | Ubezpieczenia społeczne', file: '' },
+  { title: 'Finanse | Prawo finansowe', file: '' },
+  { title: 'Informatyka | Prawo informatyczne | Ochrona danych osobowych', file: '' },
+  { title: 'Ubezpieczenia | Prawo ubezpieczeniowe', file: '' },
+  { title: 'Prawo gospodarcze | Prawo samorządowe', file: '' },
 ];
 
 // Placeholdery okładek — podmień `title`, `subtitle` oraz `cover` na prawdziwe dane.
 // Gdy podasz plik okładki, ustaw np. cover: '/images/ksiazka-1.jpg'.
 const books = [
   {
-    title: 'Tytuł publikacji I',
-    subtitle: 'Prawo gospodarcze',
-    year: '2023',
-    cover: '',
+    title: 'System prawa ubezpieczeń społecznych. Część ogólna',
+    subtitle: 'Prawo ubezpieczeń społecznych',
+    cover: '/images/ksiazka.png',
   },
   {
-    title: 'Tytuł publikacji II',
-    subtitle: 'Prawo ubezpieczeniowe',
-    year: '2021',
-    cover: '',
+    title: 'Ustrój finansowy systemu ubezpieczeń społecznych',
+    subtitle: 'Prawo finansowe',
+    cover: '/images/ksiazka2.png',
   },
   {
-    title: 'Tytuł publikacji III',
-    subtitle: 'Ochrona danych osobowych',
-    year: '2019',
-    cover: '',
+    title: 'Prawne mechanizmy przekazywania środków OFE. Oceny konstytucyjno-prawne',
+    subtitle: 'Ubezpieczenia emerytalne',
+    cover: '/images/ksiazka3.png',
   },
 ];
 ---
@@ -80,7 +78,7 @@ const books = [
           </div>
           <div class="book-info">
             <h3>{book.title}</h3>
-            <span class="book-meta">{book.subtitle} · {book.year}</span>
+            <span class="book-meta">{book.subtitle}</span>
           </div>
         </article>
       ))}
@@ -198,6 +196,7 @@ const books = [
     gap: 40px;
     max-width: 960px;
     margin: 0 auto;
+    align-items: start;
   }
 
   .book-card {
@@ -210,7 +209,6 @@ const books = [
   .book-cover {
     width: 100%;
     max-width: 220px;
-    aspect-ratio: 3 / 4;
     border-radius: var(--radius-sm);
     overflow: hidden;
     box-shadow: var(--shadow-md);
@@ -224,8 +222,8 @@ const books = [
 
   .book-cover img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
   }
 
   .book-cover-placeholder {

@@ -29,12 +29,12 @@ const partners = [
     alt: '40Data',
     label: 'Partner technologiczny RODO',
     href: 'http://www.40data.com',
-    linkText: 'www.40data.com',
+    linkText: '40data.com',
   },
   {
     src: '/images/anonyme_pl_logo.jpg',
     alt: 'Anonyme.pl',
-    label: 'Partner technologiczny — sygnaliści, RODO, przetwarzanie w AI',
+    label: 'Usługa technologiczna - sygnaliści, RODO, przetwarzanie w AI',
     href: 'https://anonyme.pl/',
     linkText: 'anonyme.pl',
   },
@@ -43,7 +43,14 @@ const partners = [
     alt: 'IBK24',
     label: 'Partner technologiczny w zakresie zarządzania Kancelarią Prawną',
     href: 'https://www.ibk24.com',
-    linkText: 'www.ibk24.com',
+    linkText: 'ibk24.com',
+  },
+  {
+    src: '/images/infojura-logo.png',
+    alt: 'Infojura',
+    label: 'Partner technologiczny - IBK, zarządzanie kancelarią prawną',
+    href: 'https://infojura.eu',
+    linkText: 'infojura.eu',
   },
 ];
 ---
@@ -214,7 +221,7 @@ const partners = [
   /* Partnerzy technologiczni */
   .partners-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 24px;
     padding-top: 32px;
     margin-top: 4px;
