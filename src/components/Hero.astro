@@ -14,7 +14,6 @@
   </div>
   <div class="hero-container">
     <div class="hero-content">
-      <div class="hero-badge">Kancelaria Prawa Gospodarczego i Ubezpieczeniowego</div>
       <h1 class="hero-title">
         <span class="hero-title-line">Profesjonalna</span>
         <span class="hero-title-line hero-title-accent">obsługa prawna</span>
@@ -33,6 +32,12 @@
       </div>
     </div>
   </div>
+
+  <div class="hero-badge">
+    <span class="hero-badge-line">KANCELARIA PRAWA</span>
+    <span class="hero-badge-sub">Gospodarczego i Ubezpieczeniowego</span>
+  </div>
+
   <div class="hero-scroll-indicator">
     <div class="scroll-line"></div>
   </div>
@@ -123,18 +128,33 @@
     max-width: 580px;
   }
 
+  /* Napis w prawym dolnym rogu sekcji hero */
   .hero-badge {
-    display: inline-block;
-    padding: 8px 20px;
-    border: 1px solid rgba(186, 154, 108, 0.3);
-    border-radius: 50px;
-    font-size: 0.7rem;
+    position: absolute;
+    z-index: 2;
+    bottom: 34px;
+    right: 40px;
+    text-align: right;
+    animation: fadeIn 0.8s ease-out 1.3s both;
+  }
+
+  .hero-badge-line {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-badge-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 1.05rem;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--color-primary);
-    margin-bottom: 32px;
-    animation: fadeInDown 0.8s ease-out 0.2s both;
   }
 
   .hero-title {
@@ -247,13 +267,14 @@
       padding: 130px 24px 90px;
     }
     .hero-content { text-align: center; max-width: 640px; }
-    .hero-badge { margin-left: auto; margin-right: auto; }
+    .hero-badge { bottom: 22px; right: 22px; }
+    .hero-badge-line { font-size: 0.9rem; }
+    .hero-badge-sub { font-size: 0.68rem; letter-spacing: 1px; }
     .hero-divider { text-align: center; }
     .hero-actions { justify-content: center; }
   }
 
   @media (max-width: 768px) {
-    .hero-badge { font-size: 0.6rem; letter-spacing: 1.5px; }
     .hero-subtitle { font-size: 0.9rem; letter-spacing: 2px; }
     .hero-actions { flex-direction: column; align-items: center; }
     .hero-actions .btn { width: 100%; max-width: 280px; justify-content: center; }
