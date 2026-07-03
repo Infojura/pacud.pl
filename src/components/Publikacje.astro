@@ -31,11 +31,9 @@ const books = [
 
 // Kolejne publikacje ładowane po kliknięciu „Zobacz więcej".
 // Ten sam format co `books` — dopisuj: { title, subtitle, cover }.
-// (Na razie dane testowe — powtórzone książki z okładkami.)
 const morePublications = [
-  { title: 'System prawa ubezpieczeń społecznych. Część ogólna', subtitle: 'Prawo pracy i ubezpieczeń społecznych', cover: '/images/ksiazka.png' },
-  { title: 'Ustrój finansowy systemu ubezpieczeń społecznych', subtitle: 'Prawo finansowe', cover: '/images/ksiazka2.png' },
-  { title: 'Prawne mechanizmy przekazywania środków OFE. Oceny konstytucyjno-prawne', subtitle: 'Prawo konstytucyjne', cover: '/images/ksiazka3.png' },
+  { title: 'Bank i agent bankowy', subtitle: 'Bankowość i prawo cywilne', cover: '/images/ksiazka4.jpg' },
+  { title: 'Oczekiwanie prawne na emeryturę dożywotnią', subtitle: 'Prawo emerytalne i ubezpieczeniowe', cover: '/images/ksiazka5.jpg' },
 ];
 ---
 
@@ -350,6 +348,13 @@ const morePublications = [
   /* Rozwijana sekcja kolejnych publikacji */
   .more-pubs {
     margin-top: 40px;
+  }
+
+  @media (min-width: 769px) {
+    .more-pubs .books-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 620px;
+    }
   }
 
   .more-toggle {
