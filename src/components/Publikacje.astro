@@ -1,6 +1,15 @@
 ---
-// Placeholdery — podmień `title`, `subtitle` oraz (opcjonalnie) `cover`
-// na prawdziwe dane. Gdy podasz plik okładki, ustaw np. cover: '/images/ksiazka-1.jpg'.
+// Dziedziny prawa — do każdej pozycji zostanie dołączony osobny plik/wykaz publikacji.
+// Gdy otrzymasz plik, ustaw `file: '/pliki/nazwa.pdf'` — wtedy pojawi się przycisk pobrania.
+const areas = [
+  { title: 'Praca, Prawo Pracy i Ubezpieczeń Społecznych', file: '' },
+  { title: 'Finanse i Prawo Finansowe', file: '' },
+  { title: 'Informatyka i Prawo informatyczne', file: '' },
+  { title: 'Ubezpieczenia i Prawo ubezpieczeniowe', file: '' },
+];
+
+// Placeholdery okładek — podmień `title`, `subtitle` oraz `cover` na prawdziwe dane.
+// Gdy podasz plik okładki, ustaw np. cover: '/images/ksiazka-1.jpg'.
 const books = [
   {
     title: 'Tytuł publikacji I',
@@ -28,11 +37,31 @@ const books = [
     <div class="publikacje-header reveal">
       <span class="section-label">Dorobek</span>
       <h2 class="section-title">Publikacje</h2>
+      <p class="publikacje-subtitle">Publikacje prof. ucz. Radosława Pacuda</p>
       <div class="section-divider center"></div>
       <p class="publikacje-lead">
-        Wiedzę i doświadczenie dzielimy również na kartach książek oraz opracowań
-        naukowych z zakresu prawa gospodarczego i ubezpieczeniowego.
+        Łączymy doświadczenie z wiedzą i nauką. Dzielimy się wiedzą na kartach książek
+        oraz opracowań naukowych z następujących dziedzin prawa:
       </p>
+    </div>
+
+    <div class="areas reveal delay-1">
+      {areas.map((area) => (
+        <details class="area">
+          <summary>
+            <span class="area-title">{area.title}</span>
+            <svg class="area-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="area-body">
+            {area.file
+              ? <a class="area-file" href={area.file} target="_blank" rel="noopener noreferrer">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Pobierz wykaz publikacji
+                </a>
+              : <p class="area-placeholder">Wykaz publikacji zostanie wkrótce uzupełniony.</p>}
+          </div>
+        </details>
+      ))}
     </div>
 
     <div class="books-grid">
@@ -71,12 +100,96 @@ const books = [
     margin-bottom: 64px;
   }
 
+  .publikacje-subtitle {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+
   .publikacje-lead {
-    max-width: 620px;
+    max-width: 640px;
     margin: 4px auto 0;
     color: var(--color-text-light);
     font-size: 1.05rem;
     line-height: 1.8;
+  }
+
+  /* Rozwijana lista dziedzin prawa */
+  .areas {
+    max-width: 760px;
+    margin: 0 auto 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .area {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+
+  .area[open] {
+    border-color: transparent;
+    box-shadow: var(--shadow-md);
+  }
+
+  .area summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-navy);
+  }
+
+  .area summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .area summary:hover .area-title {
+    color: var(--color-primary);
+  }
+
+  .area-chevron {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+  }
+
+  .area[open] .area-chevron {
+    transform: rotate(180deg);
+  }
+
+  .area-body {
+    padding: 0 24px 22px;
+  }
+
+  .area-placeholder {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+
+  .area-file {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .area-file:hover {
+    text-decoration: underline;
   }
 
   .books-grid {

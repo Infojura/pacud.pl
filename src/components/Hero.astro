@@ -1,8 +1,10 @@
 ---
 ---
 
-<section class="hero">
+<!-- Aby wyłączyć niebieską poświatę, usuń klasę "with-glow" poniżej -->
+<section class="hero with-glow">
   <div class="hero-bg-overlay"></div>
+  <div class="hero-glow"></div>
   <div class="hero-particles">
     <div class="particle p1"></div>
     <div class="particle p2"></div>
@@ -21,7 +23,7 @@
       <div class="hero-divider">
         <span></span>
       </div>
-      <p class="hero-subtitle">PACUD Radcowie Prawni</p>
+      <p class="hero-subtitle">25 lat doświadczenia w branży</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#kontakt">
           Skontaktuj się
@@ -56,6 +58,24 @@
       rgba(1, 2, 59, 0.35) 50%,
       rgba(10, 11, 82, 0.45) 100%
     );
+  }
+
+  /* Niebieska poświata — aktywna tylko gdy sekcja ma klasę "with-glow" */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: none;
+    background:
+      radial-gradient(58% 52% at 50% 42%,
+        rgba(28, 134, 198, 0.42) 0%,
+        rgba(28, 134, 198, 0.16) 42%,
+        transparent 72%);
+    mix-blend-mode: screen;
+  }
+
+  .hero.with-glow .hero-glow {
+    display: block;
   }
 
   /* Floating particles */

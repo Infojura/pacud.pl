@@ -2,23 +2,48 @@
 const services = [
   {
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>',
-    title: 'Obsługa przedsiębiorstw',
-    desc: 'Kompleksowa obsługa krajowych firm oraz obrotu zagranicznego w języku polskim i angielskim.',
+    title: 'Obsługa przedsiębiorstw oraz M&A',
+    desc: 'Kompleksowa obsługa krajowych firm oraz obrotu zagranicznego w języku polskim i angielskim. Restrukturyzacja gospodarcza i doradztwo podatkowe.',
   },
   {
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
     title: 'Ubezpieczenia i odszkodowania',
-    desc: 'Obsługa spraw ubezpieczeniowych oraz odszkodowawczych osób fizycznych.',
+    desc: 'Doradztwo dla podmiotów rynku ubezpieczeniowego. Obsługa spraw ubezpieczeniowych oraz odszkodowawczych osób fizycznych.',
   },
   {
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>',
-    title: 'Ochrona danych (RODO)',
-    desc: 'Dostosowanie działalności gospodarczej do wymogów Ogólnego Rozporządzenia o Ochronie Danych.',
+    title: 'IT i bezpieczeństwo danych',
+    desc: 'Doradztwo prawne w projektach informatycznych. Wsparcie transformacji cyfrowej kancelarii prawnej. Dostosowanie działalności gospodarczej do RODO. Partnerstwo z Anonyme.pl (oprogramowanie do anonimizacji dokumentów, bezpiecznej wymiany informacji z GenAI).',
   },
   {
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
     title: 'Obsługa sygnalistów',
-    desc: 'Oprogramowanie do ochrony poufności sygnalistów, anonimizacji dokumentów i bezpiecznej wymiany informacji.',
+    desc: 'Wspieramy podmioty publiczne i przedsiębiorstwa przy wdrażaniu procesów compliance w zakresie ochrony sygnalistów. Partnerstwo z Anonyme.pl (oprogramowanie do ochrony poufności i sygnalistów).',
+  },
+];
+
+// Partnerzy technologiczni w zakresie RODO, sygnalistów oraz przetwarzania w AI
+const partners = [
+  {
+    src: '/images/40data.png',
+    alt: '40Data',
+    label: 'Partner technologiczny RODO',
+    href: 'http://www.40data.com',
+    linkText: 'www.40data.com',
+  },
+  {
+    src: '/images/anonyme_pl_logo.jpg',
+    alt: 'Anonyme.pl',
+    label: 'Partner technologiczny — sygnaliści, RODO, przetwarzanie w AI',
+    href: 'https://anonyme.pl/',
+    linkText: 'anonyme.pl',
+  },
+  {
+    src: '/images/ibk_logo.png',
+    alt: 'IBK24',
+    label: 'Partner technologiczny w zakresie zarządzania Kancelarią Prawną',
+    href: 'https://www.ibk24.com',
+    linkText: 'www.ibk24.com',
   },
 ];
 ---
@@ -35,9 +60,11 @@ const services = [
     <!-- Lead text -->
     <div class="oferta-lead reveal delay-1">
       <p>
-        Posiadamy wieloletnie doświadczenie w stałej bieżącej obsłudze prawnej oraz procesów
-        akwizycyjnych w branży sektora informatycznego, handlowej, finansowej, budownictwa,
-        gospodarki odpadami i gospodarki komunalnej.
+        Posiadamy ponad 25-letnie doświadczenie w obsłudze prawnej przedsiębiorstw oraz
+        podmiotów publicznych. Doradzamy w sektorze informatycznym, handlowym, budowlanym,
+        gospodarki odpadami oraz gospodarki komunalnej. Wspieramy naszych klientów
+        w procesach akwizycyjnych M&A, transformacjach gospodarczych i innych sprawach
+        majątkowych.
       </p>
     </div>
 
@@ -52,40 +79,26 @@ const services = [
       ))}
     </div>
 
-    <!-- RODO details -->
+    <!-- RODO / AI details -->
     <div class="rodo-section reveal">
       <div class="rodo-content">
-        <h3>Wsparcie w zakresie RODO</h3>
+        <h3>Wsparcie w zakresie RODO oraz przetwarzania dokumentów w narzędziach AI</h3>
         <p>
           Oferujemy bieżącą pomoc prawno-informatyczną w utrzymaniu właściwego poziomu
           ochrony danych osobowych w Twojej firmie, jak również pomoc w dialogu z Urzędem Nadzoru.
         </p>
-        <div class="rodo-partner">
-          <img src="/images/40data.png" alt="40Data" width="160" loading="lazy" />
-          <div>
-            <span class="partner-label">Partner technologiczny RODO</span>
-            <a href="http://www.40data.com" target="_blank" rel="noopener noreferrer">www.40data.com</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tech partner -->
-    <div class="tech-partner reveal">
-      <div class="tech-partner-inner">
-        <div class="tech-partner-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        </div>
-        <div>
-          <h4>Partner technologiczny — Whistleblowing</h4>
-          <p>
-            Anonimizacja dokumentów oraz przekazywanie informacji bez ujawnienia adresatów.
-          </p>
-          <div class="partner-links">
-            <a href="https://anonyme.pl/" target="_blank" rel="noopener noreferrer">anonyme.pl</a>
-            <span class="dot"></span>
-            <a href="http://www.ibk24.com" target="_blank" rel="noopener noreferrer">ibk24.com</a>
-          </div>
+        <div class="partners-grid">
+          {partners.map((p) => (
+            <div class="partner-item">
+              <div class="partner-logo">
+                <img src={p.src} alt={p.alt} loading="lazy" />
+              </div>
+              <div class="partner-meta">
+                <span class="partner-label">{p.label}</span>
+                <a href={p.href} target="_blank" rel="noopener noreferrer">{p.linkText}</a>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -95,7 +108,7 @@ const services = [
 <style>
   .oferta {
     padding: 120px 0;
-    background: var(--color-bg-alt);
+    background: var(--color-bg);
   }
 
   .oferta-header {
@@ -198,97 +211,54 @@ const services = [
     margin-bottom: 28px;
   }
 
-  .rodo-partner {
-    display: flex;
-    align-items: center;
+  /* Partnerzy technologiczni */
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    padding-top: 24px;
+    padding-top: 32px;
+    margin-top: 4px;
     border-top: 1px solid var(--color-border);
   }
 
-  .rodo-partner img {
+  .partner-item {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .partner-logo {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .partner-logo img {
+    max-height: 64px;
+    max-width: 160px;
+    width: auto;
+    object-fit: contain;
     border-radius: var(--radius-sm);
   }
 
   .partner-label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    line-height: 1.4;
     color: var(--color-text-light);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
-  .rodo-partner a {
+  .partner-meta a {
     color: var(--color-accent);
     font-weight: 600;
+    font-size: 0.9rem;
   }
 
-  .rodo-partner a:hover {
+  .partner-meta a:hover {
     text-decoration: underline;
-  }
-
-  /* Tech partner */
-  .tech-partner {
-    background: var(--color-navy);
-    border-radius: var(--radius-md);
-    padding: 40px 48px;
-  }
-
-  .tech-partner-inner {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-  }
-
-  .tech-partner-icon {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(186, 154, 108, 0.15);
-    border-radius: var(--radius-sm);
-    color: var(--color-primary);
-  }
-
-  .tech-partner h4 {
-    color: #fff;
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .tech-partner p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 14px;
-  }
-
-  .partner-links {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .partner-links a {
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  .partner-links a:hover {
-    text-decoration: underline;
-  }
-
-  .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
   }
 
   @media (max-width: 768px) {
@@ -301,8 +271,9 @@ const services = [
     }
     .service-card { padding: 32px 24px; }
     .rodo-content { padding: 32px 24px; }
-    .tech-partner { padding: 28px 24px; }
-    .tech-partner-inner { flex-direction: column; }
-    .rodo-partner { flex-direction: column; align-items: flex-start; }
+    .partners-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
   }
 </style>

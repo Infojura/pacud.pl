@@ -1,4 +1,15 @@
 ---
+// Wysyłka formularza obsługiwana przez Web3Forms (https://web3forms.com) —
+// zgłoszenia trafiają na adres przypisany do klucza (ustaw: sekretariat@pacud.pl).
+// 1. Wejdź na https://web3forms.com, podaj e-mail sekretariat@pacud.pl i skopiuj Access Key.
+// 2. Wklej klucz poniżej w miejsce PLACEHOLDER.
+const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
+
+// reCAPTCHA v2 — poniżej klucz TESTOWY Google (widżet się wyświetla i zawsze przechodzi).
+// Przy publikacji:
+//   1. Zarejestruj domenę pacud.pl na https://www.google.com/recaptcha/admin → dostaniesz site key + secret key.
+//   2. Wklej site key poniżej, a secret key wprowadź w panelu Web3Forms (włącz tam weryfikację reCAPTCHA).
+const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 ---
 
 <section class="formularz" id="formularz">
@@ -23,7 +34,13 @@
       </div>
     </div>
 
-    <form class="formularz-form reveal from-right" method="post" action="#">
+    <form class="formularz-form reveal from-right" id="kontakt-form" novalidate>
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+      <input type="hidden" name="subject" value="Nowe zgłoszenie z formularza — pacud.pl" />
+      <input type="hidden" name="from_name" value="Formularz KPGIU Radosław Pacud" />
+      <!-- Honeypot antyspamowy (ukryty przed użytkownikiem) -->
+      <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" />
+
       <div class="form-row">
         <div class="form-group">
           <label for="imie">Imię <span class="required">*</span></label>
@@ -50,13 +67,66 @@
         <textarea id="wiadomosc" name="wiadomosc" rows="4" placeholder="W czym możemy pomóc?" required></textarea>
       </div>
 
+      <div class="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY}></div>
+
       <button type="submit" class="btn btn-primary btn-submit">
         Wyślij wiadomość
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
       </button>
+
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
+
+<script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script>
+  const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    // Weryfikacja reCAPTCHA (jeśli widżet jest załadowany)
+    const grecaptcha = (window as any).grecaptcha;
+    if (grecaptcha && typeof grecaptcha.getResponse === 'function' && !grecaptcha.getResponse()) {
+      status.textContent = 'Potwierdź, że nie jesteś robotem.';
+      status.className = 'form-status error';
+      return;
+    }
+
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    if (submitBtn) submitBtn.disabled = true;
+    status.textContent = 'Wysyłanie…';
+    status.className = 'form-status';
+
+    try {
+      const data = new FormData(form);
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data,
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        status.textContent = 'Dziękujemy! Wiadomość została wysłana. Odpowiemy tak szybko, jak to możliwe.';
+        status.className = 'form-status success';
+        form.reset();
+      } else {
+        status.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz bezpośrednio na sekretariat@pacud.pl.';
+        status.className = 'form-status error';
+      }
+    } catch {
+      status.textContent = 'Błąd połączenia. Spróbuj ponownie później lub napisz na sekretariat@pacud.pl.';
+      status.className = 'form-status error';
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (grecaptcha && typeof grecaptcha.reset === 'function') grecaptcha.reset();
+    }
+  });
+</script>
 
 <style>
   .formularz {
@@ -180,11 +250,46 @@
     min-height: 100px;
   }
 
+  .g-recaptcha {
+    margin-bottom: 20px;
+  }
+
   .btn-submit {
     width: 100%;
     justify-content: center;
     padding: 16px 32px;
     font-size: 0.95rem;
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* Honeypot — ukryty przed człowiekiem, widoczny dla botów */
+  .hp-field {
+    position: absolute !important;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-status {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    min-height: 1.2em;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .form-status.success {
+    color: #6ee7a8;
+  }
+
+  .form-status.error {
+    color: #ff9b9b;
   }
 
   @media (max-width: 860px) {

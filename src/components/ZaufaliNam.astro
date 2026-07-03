@@ -1,9 +1,30 @@
 ---
+// Kolejność = częstotliwość wyświetlania (najczęściej pokazywani na początku).
+// Klienci bez pliku logo mają `src: ''` — renderowany jest kafelek tekstowy.
+// Aby dodać logo PRUIM / MAAD: wrzuć plik do public/images i uzupełnij `src`.
 const clients = [
-  { src: '/images/impulso.jpeg', alt: 'Impulso' },
+  { src: '/images/savangard.jpg', alt: 'Savangard' },
+  { src: '/images/wojewodztwo-slaskie.jpg', alt: 'Województwo Śląskie' },
+  { src: '/images/gmina_logo.png', alt: 'Gmina Poczesna' },
+  { src: '/images/Logo-PRUiM-Gliwice-b.png', alt: 'PRUIM S.A.' },
+  { src: '/images/impulso.jpeg', alt: 'IMPULSO' },
   { src: '/images/mpk-radomsko.jpeg', alt: 'MPK Radomsko' },
-  { src: '/images/warta-sa.jpeg', alt: 'Warta SA' },
+  { src: '/images/warta-sa.jpeg', alt: 'Warta S.A.' },
+  { src: '/images/ranal.png', alt: 'Przedsiębiorstwo RANAL' },
+  { src: '/images/maad.jpg', alt: 'MAAD Sp. z o.o.' },
+  { src: '/images/sangaz.webp', alt: 'SANGAZ' },
 ];
+
+// Monogram (2 litery) dla firm bez pliku logo.
+function initials(name: string) {
+  const clean = name.replace(/S\.?A\.?|Sp\.?|z\s*o\.?\s*o\.?|\./gi, ' ').trim();
+  const words = clean.split(/\s+/).filter(Boolean);
+  const letters = words.length > 1 ? words[0][0] + words[1][0] : name.slice(0, 2);
+  return letters.toUpperCase();
+}
+
+// Duplikujemy listę, aby uzyskać płynną, nieprzerwaną pętlę.
+const loop = [...clients, ...clients];
 ---
 
 <section class="zaufali" id="zaufali-nam">
@@ -14,13 +35,21 @@ const clients = [
         <h2 class="section-title">Zaufali nam</h2>
         <div class="section-divider"></div>
       </div>
-      <div class="clients-row">
-        {clients.map((client, i) => (
-          <div class={`client-card reveal scale-in delay-${i + 1}`}>
-            <img src={client.src} alt={client.alt} width="190" height="130" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="marquee reveal delay-1">
+    <div class="marquee-track">
+      {loop.map((client) => (
+        <div class="client-card">
+          <div class="client-logo">
+            {client.src
+              ? <img src={client.src} alt={client.alt} loading="lazy" />
+              : <span class="client-initials">{initials(client.alt)}</span>}
           </div>
-        ))}
-      </div>
+          <span class="client-name">{client.alt}</span>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -30,6 +59,7 @@ const clients = [
     padding: 80px 0;
     background: var(--color-bg-alt);
     border-top: 1px solid var(--color-border);
+    overflow: hidden;
   }
 
   .zaufali-inner {
@@ -44,45 +74,102 @@ const clients = [
     margin: 0 auto 24px;
   }
 
-  .clients-row {
+  /* Karuzela — 3 widoczne jednocześnie, płynne, ciągłe przewijanie */
+  .marquee {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 24px;
+    overflow: hidden;
+    /* miękkie wygaszanie na krawędziach */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .marquee-track {
     display: flex;
-    justify-content: center;
     gap: 32px;
-    flex-wrap: wrap;
+    width: max-content;
+    animation: scroll-x 45s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
   .client-card {
+    /* 3 kafelki na szerokości kontenera (odejmujemy 2 przerwy po 32px) */
+    flex: 0 0 clamp(220px, calc((100vw - 220px) / 3), 352px);
+    height: 168px;
     background: #fff;
     border-radius: var(--radius-md);
-    padding: 24px 28px;
+    padding: 22px 24px 16px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 14px;
     border: 1px solid var(--color-border);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .client-card:hover {
-    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
     border-color: transparent;
+    transform: translateY(-4px);
   }
 
-  .client-card img {
-    width: 170px;
-    height: auto;
+  .client-logo {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  .client-logo img {
+    max-width: 100%;
+    max-height: 78px;
+    width: auto;
     object-fit: contain;
-    filter: grayscale(30%);
+    filter: grayscale(35%);
     transition: filter 0.3s;
   }
 
-  .client-card:hover img {
+  .client-card:hover .client-logo img {
     filter: grayscale(0%);
   }
 
-  @media (max-width: 600px) {
-    .clients-row { gap: 16px; }
-    .client-card { padding: 16px 20px; }
-    .client-card img { width: 140px; }
+  .client-initials {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--color-primary), #d4b88a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .client-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    text-align: center;
+    letter-spacing: 0.2px;
+    line-height: 1.3;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
   }
 </style>
