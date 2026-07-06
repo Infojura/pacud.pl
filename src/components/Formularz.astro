@@ -4,6 +4,12 @@
 // 1. Wejdź na https://web3forms.com, podaj e-mail sekretariat@pacud.pl i skopiuj Access Key.
 // 2. Wklej klucz poniżej w miejsce PLACEHOLDER.
 const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
+
+// Google reCAPTCHA v2 — zabezpieczenie formularza przed spamem.
+// Poniżej PUBLICZNY klucz TESTOWY Google (zawsze przechodzi, wyświetla ostrzeżenie
+// „for testing purposes only"). Przed publikacją podmień na produkcyjny site key
+// (https://www.google.com/recaptcha/admin) i włącz reCAPTCHA w panelu Web3Forms.
+const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 ---
 
 <section class="formularz" id="formularz">
@@ -70,6 +76,10 @@ const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
         </label>
       </div>
 
+      <div class="form-recaptcha">
+        <div class="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY}></div>
+      </div>
+
       <button type="submit" class="btn btn-primary btn-submit">
         Wyślij wiadomość
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
@@ -96,6 +106,14 @@ const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
       return;
     }
 
+    // Weryfikacja reCAPTCHA (jeśli widget się załadował)
+    const recaptcha = (window as any).grecaptcha;
+    if (recaptcha && typeof recaptcha.getResponse === 'function' && !recaptcha.getResponse()) {
+      status.textContent = 'Potwierdź, że nie jesteś robotem.';
+      status.className = 'form-status error';
+      return;
+    }
+
     const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
     if (submitBtn) submitBtn.disabled = true;
     status.textContent = 'Wysyłanie…';
@@ -113,18 +131,21 @@ const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
         status.textContent = 'Dziękujemy! Wiadomość została wysłana. Odpowiemy tak szybko, jak to możliwe.';
         status.className = 'form-status success';
         form.reset();
+        if (recaptcha && typeof recaptcha.reset === 'function') recaptcha.reset();
       } else {
-        status.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz bezpośrednio na sekretariat@pacud.pl.';
+        status.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub skorzystaj z danych kontaktowych w sekcji „Kontakt".';
         status.className = 'form-status error';
       }
     } catch {
-      status.textContent = 'Błąd połączenia. Spróbuj ponownie później lub napisz na sekretariat@pacud.pl.';
+      status.textContent = 'Błąd połączenia. Spróbuj ponownie później lub skorzystaj z danych kontaktowych w sekcji „Kontakt".';
       status.className = 'form-status error';
     } finally {
       if (submitBtn) submitBtn.disabled = false;
     }
   });
 </script>
+
+<script is:inline async defer src="https://www.google.com/recaptcha/api.js"></script>
 
 <style>
   .formularz {
@@ -274,6 +295,10 @@ const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
   .form-consent a {
     color: var(--color-primary);
     text-decoration: underline;
+  }
+
+  .form-recaptcha {
+    margin-bottom: 20px;
   }
 
   .btn-submit {

@@ -19,10 +19,33 @@
         <span class="hero-title-line hero-title-accent">obsługa prawna</span>
         <span class="hero-title-line">Twojego biznesu</span>
       </h1>
-      <div class="hero-divider">
-        <span></span>
-      </div>
-      <p class="hero-subtitle">25 lat doświadczenia w branży</p>
+      <p class="hero-subtitle">
+        <svg class="laurel" viewBox="0 0 44 96" aria-hidden="true">
+          <defs>
+            <linearGradient id="laurelGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#e2caa0" />
+              <stop offset="0.5" stop-color="#c9a978" />
+              <stop offset="1" stop-color="#b0894f" />
+            </linearGradient>
+          </defs>
+          <g id="laurelBranch" fill="url(#laurelGold)">
+            <path d="M28 92 C 12 76 10 50 16 24 C 18 16 22 10 25 5" fill="none" stroke="url(#laurelGold)" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(24 86) rotate(-40)" />
+            <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(18 72) rotate(-52)" />
+            <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(14 56) rotate(-64)" />
+            <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(13 40) rotate(-74)" />
+            <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(15 26) rotate(-84)" />
+            <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(20 14) rotate(-92)" />
+            <path d="M0 0 C 2.4 -3.2 2.4 -9.6 0 -14.4 C -2.4 -9.6 -2.4 -3.2 0 0 Z" transform="translate(28 80) rotate(28)" />
+            <path d="M0 0 C 2.4 -3.2 2.4 -9.6 0 -14.4 C -2.4 -9.6 -2.4 -3.2 0 0 Z" transform="translate(22 64) rotate(18)" />
+            <path d="M0 0 C 2.4 -3.2 2.4 -9.6 0 -14.4 C -2.4 -9.6 -2.4 -3.2 0 0 Z" transform="translate(18 48) rotate(8)" />
+            <path d="M0 0 C 2.4 -3.2 2.4 -9.6 0 -14.4 C -2.4 -9.6 -2.4 -3.2 0 0 Z" transform="translate(18 33) rotate(0)" />
+            <path d="M0 0 C 2.6 -3.4 2.6 -10 0 -15 C -2.6 -10 -2.6 -3.4 0 0 Z" transform="translate(24 8) rotate(-96)" />
+          </g>
+        </svg>
+        <span class="hero-subtitle-text">25 lat doświadczenia w branży</span>
+        <svg class="laurel laurel-flip" viewBox="0 0 44 96" aria-hidden="true"><use href="#laurelBranch" /></svg>
+      </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#kontakt">
           Skontaktuj się
@@ -195,6 +218,9 @@
   }
 
   .hero-subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
     color: rgba(255, 255, 255, 0.7);
     font-family: var(--font-heading);
     font-size: 1.1rem;
@@ -203,6 +229,21 @@
     text-transform: uppercase;
     margin-bottom: 40px;
     animation: fadeIn 0.6s ease-out 1s both;
+  }
+
+  .hero-subtitle-text {
+    padding-left: 3px;
+  }
+
+  .laurel {
+    height: 42px;
+    width: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+  }
+
+  .laurel-flip {
+    transform: scaleX(-1);
   }
 
   .hero-actions {
@@ -275,7 +316,8 @@
   }
 
   @media (max-width: 768px) {
-    .hero-subtitle { font-size: 0.9rem; letter-spacing: 2px; }
+    .hero-subtitle { font-size: 0.9rem; letter-spacing: 2px; gap: 12px; }
+    .laurel { height: 34px; }
     .hero-actions { flex-direction: column; align-items: center; }
     .hero-actions .btn { width: 100%; max-width: 280px; justify-content: center; }
     .hero-scroll-indicator { display: none; }

@@ -2,17 +2,19 @@
 // Kolejność = częstotliwość wyświetlania (najczęściej pokazywani na początku).
 // Klienci bez pliku logo mają `src: ''` — renderowany jest kafelek tekstowy.
 // Aby dodać logo PRUIM / MAAD: wrzuć plik do public/images i uzupełnij `src`.
-const clients = [
-  { src: '/images/savangard.jpg', alt: 'Savangard sp. z o.o.' },
+// `initials` (opcjonalne) — monogram dla firm bez pliku logo (src: '').
+const clients: { src: string; alt: string; initials?: string }[] = [
+  { src: '/images/savangard.jpg', alt: 'Savangard Sp. z o.o. (Warszawa)' },
+  { src: '/images/peoplevibe_logo.png', alt: 'PeopleVibe Sp. z o.o. (Warszawa)' },
   { src: '/images/wojewodztwo-slaskie.jpg', alt: 'Województwo Śląskie' },
   { src: '/images/gmina_logo.png', alt: 'Gmina Poczesna' },
   { src: '/images/Logo-PRUiM-Gliwice-b.png', alt: 'PRUiM S.A.' },
   { src: '/images/impulso.jpeg', alt: 'Impulso Bojanek Sp. J.' },
   { src: '/images/mpk-radomsko.jpeg', alt: 'MPK Radomsko' },
   { src: '/images/warta-sa.jpeg', alt: 'Warta S.A.' },
-  { src: '/images/ranal.png', alt: 'Ranal sp. z o.o. – Grupa Novol' },
+  { src: '/images/ranal.png', alt: 'Ranal Sp. z o.o. (Rudniki)' },
   { src: '/images/maad.jpg', alt: 'Maad sp. z o.o.' },
-  { src: '/images/sangaz.webp', alt: 'Sangaz sp. z o.o.' },
+  { src: '/images/sangaz.webp', alt: 'Sangaz Sp. z o.o. (Częstochowa)' },
 ];
 
 // Monogram (2 litery) dla firm bez pliku logo.
@@ -44,8 +46,8 @@ const loop = [...clients, ...clients];
         <div class="client-card">
           <div class="client-logo">
             {client.src
-              ? <img src={client.src} alt={client.alt} loading="lazy" />
-              : <span class="client-initials">{initials(client.alt)}</span>}
+              ? <img src={client.src} alt={client.alt} loading="eager" decoding="async" />
+              : <span class="client-initials">{client.initials ?? initials(client.alt)}</span>}
           </div>
           <span class="client-name">{client.alt}</span>
         </div>
@@ -91,6 +93,7 @@ const loop = [...clients, ...clients];
     gap: 32px;
     width: max-content;
     animation: scroll-x 45s linear infinite;
+    will-change: transform;
   }
 
   .marquee:hover .marquee-track {

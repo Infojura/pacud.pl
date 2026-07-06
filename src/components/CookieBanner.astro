@@ -1,0 +1,159 @@
+---
+// Baner zgody na pliki cookies.
+// Wybór zapisywany w localStorage pod kluczem `cookie-consent`:
+//   'all'       — zgoda na cookies zewnętrzne (m.in. mapa Google),
+//   'necessary' — tylko niezbędne (mapa i inne usługi zewnętrzne pozostają zablokowane).
+// Zamknięcie banera (X) traktowane jest jako „tylko niezbędne" — brak zgody na cookies nieistotne.
+---
+
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <button class="cookie-close" id="cookie-close" type="button" aria-label="Zamknij baner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="cookie-content">
+    <p class="cookie-text">
+      Używamy plików cookies, aby zapewnić prawidłowe działanie serwisu oraz poprawić jakość
+      korzystania z niego. Możesz zaakceptować wszystkie pliki cookies lub korzystać wyłącznie
+      z niezbędnych. Szczegóły znajdziesz w <a href="/polityka-prywatnosci">Polityce prywatności</a>.
+    </p>
+    <div class="cookie-actions">
+      <button class="btn btn-primary cookie-btn" id="cookie-accept-all" type="button">Akceptuję wszystkie</button>
+      <button class="btn cookie-btn cookie-btn-secondary" id="cookie-accept-necessary" type="button">Tylko niezbędne</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const KEY = 'cookie-consent';
+  const banner = document.getElementById('cookie-banner');
+
+  function readConsent() {
+    try { return localStorage.getItem(KEY); } catch { return null; }
+  }
+
+  function setConsent(value: string) {
+    try { localStorage.setItem(KEY, value); } catch {}
+    banner?.setAttribute('hidden', '');
+    document.dispatchEvent(new CustomEvent('cookie-consent-updated', { detail: value }));
+  }
+
+  if (!readConsent()) {
+    banner?.removeAttribute('hidden');
+  }
+
+  document.getElementById('cookie-accept-all')?.addEventListener('click', () => setConsent('all'));
+  document.getElementById('cookie-accept-necessary')?.addEventListener('click', () => setConsent('necessary'));
+  // Zamknięcie krzyżykiem = brak zgody na cookies nieistotne (tylko niezbędne).
+  document.getElementById('cookie-close')?.addEventListener('click', () => setConsent('necessary'));
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 300;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 22px 26px;
+    animation: cookieIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cookie-banner[hidden] {
+    display: none;
+  }
+
+  @keyframes cookieIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .cookie-content {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .cookie-text {
+    flex: 1;
+    min-width: 260px;
+    padding-right: 8px;
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+  }
+
+  .cookie-text a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cookie-btn {
+    padding: 12px 26px;
+    font-size: 0.8rem;
+  }
+
+  .cookie-btn-secondary {
+    background: transparent;
+    color: var(--color-navy);
+    border: 1px solid var(--color-border);
+  }
+
+  .cookie-btn-secondary:hover {
+    background: var(--color-bg-alt);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .cookie-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .cookie-close:hover {
+    background: var(--color-bg-alt);
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-banner {
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      padding: 22px 18px;
+    }
+    .cookie-content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 18px;
+    }
+    .cookie-actions .cookie-btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+</style>

@@ -50,6 +50,7 @@
         <span class="footer-legal-links">
           <a href="/polityka-prywatnosci">Polityka prywatności</a>
           <a href="/regulamin">Regulamin</a>
+          <a href="#" id="cookie-settings-link">Ustawienia cookies</a>
         </span>
       </div>
       <div class="footer-social">
@@ -63,6 +64,15 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // „Ustawienia cookies" — kasuje zapisany wybór i ponownie pokazuje baner.
+  document.getElementById('cookie-settings-link')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    try { localStorage.removeItem('cookie-consent'); } catch {}
+    location.reload();
+  });
+</script>
 
 <style>
   .footer {
