@@ -3,14 +3,14 @@ const team = [
   {
     name: 'Radosław Pacud',
     role: 'Radca prawny',
-    img: '/images/radoslaw-pacud1.jpg',
+    img: '/images/radoslaw-pacud1-opt.jpg',
     initials: 'RP',
     desc: 'Założyciel kancelarii. Specjalizuje się w prawie gospodarczym oraz ubezpieczeniowym, doradzając przedsiębiorstwom w kraju i w obrocie zagranicznym.',
   },
   {
     name: 'Artur Osuchowski',
     role: 'Radca prawny',
-    img: '/images/a_osuchowski.jpg',
+    img: '/images/a_osuchowski-opt.jpg',
     initials: 'AO',
     desc: 'Specjalizuje się w prawie administracyjnym, zamówieniach publicznych oraz obsłudze podmiotów publicznych. Wspiera klientów w sprawach z zakresu prawa publicznego oraz klientów indywidualnych.',
   },
@@ -30,7 +30,7 @@ const team = [
         <div class={`team-card reveal delay-${i + 1}`}>
           <div class="team-photo">
             {member.img
-              ? <img src={member.img} alt={member.name} loading="lazy" />
+              ? <img src={member.img} alt={member.name} width="600" height="450" loading="eager" decoding="async" />
               : <div class="team-initials"><span>{member.initials}</span></div>}
           </div>
           <div class="team-info">
@@ -68,8 +68,18 @@ const team = [
     border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Rozdzielone przejścia: płynne pojawianie (reveal) + subtelny hover,
+       aby własna transition kafelka nie nadpisywała animacji reveal. */
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
+  /* Stagger dla pojawiania się kafelków (scoped, by nie został nadpisany) */
+  .team-card.delay-1 { transition-delay: 0.08s; }
+  .team-card.delay-2 { transition-delay: 0.18s; }
 
   .team-card:hover {
     transform: translateY(-6px);
