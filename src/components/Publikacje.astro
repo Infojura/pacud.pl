@@ -62,7 +62,7 @@ const areas = [
 const books = [
   {
     title: 'System prawa ubezpieczeń społecznych. Część ogólna',
-    subtitle: 'Rozdział 6 i Rozdział 7 – Prawo ubezpieczeń społecznych',
+    subtitle: 'Prawo ubezpieczeń społecznych',
     cover: '/images/ksiazka.png',
   },
   {
@@ -82,7 +82,7 @@ const books = [
 const morePublications = [
   { title: 'Bank i agent bankowy', subtitle: 'Bankowość i prawo cywilne', cover: '/images/ksiazka4.jpg' },
   { title: 'Oczekiwanie prawne na emeryturę dożywotnią', subtitle: 'Prawo emerytalne i ubezpieczeniowe', cover: '/images/ksiazka5.jpg' },
-  { title: 'Ustawa o systemie ubezpieczeń społecznych. Komentarz', subtitle: 'Prawo ubezpieczeń społecznych', cover: '/images/ksiazka6.jpg' },
+  { title: 'Ustawa o systemie ubezpieczeń społecznych. Komentarz', subtitle: 'Rozdział 6 i Rozdział 7\nPrawo ubezpieczeń społecznych', cover: '/images/ksiazka6.jpg' },
 ];
 ---
 
@@ -91,13 +91,15 @@ const morePublications = [
     <div class="publikacje-header reveal">
       <span class="section-label">Dorobek</span>
       <h2 class="section-title">Publikacje</h2>
-      <p class="publikacje-subtitle">Publikacje prof. ucz. Radosława Pacuda</p>
       <div class="section-divider center"></div>
       <p class="publikacje-lead">
-        Ponad 100 publikacji naukowych, w tym: samodzielnych monografii, redakcji monografii
-        zespołowych, rozdziałów w książkach, artykułów naukowych, glos do orzeczeń oraz
-        wypowiedzi popularnonaukowych w prasie naukowej. Zebraliśmy nurty badań połączonych
-        z praktyką — zakładki te będą aktualizowane.
+        Dorobek naukowy dr hab. Radosława Pacuda, prof. UE, obejmuje ponad 100 publikacji,
+        w tym samodzielne monografie, monografie zbiorowe pod jego redakcją, rozdziały
+        w publikacjach naukowych, artykuły naukowe, glosy do orzeczeń Sądu Najwyższego oraz
+        artykuły i komentarze popularnonaukowe publikowane w prasie branżowej.
+      </p>
+      <p class="publikacje-lead publikacje-lead-sub">
+        Publikacje przykładowe podzielone na kierunki badań poniżej — zakładki te będą aktualizowane.
       </p>
     </div>
 
@@ -223,6 +225,10 @@ const morePublications = [
     color: var(--color-text-light);
     font-size: 1.05rem;
     line-height: 1.8;
+  }
+
+  .publikacje-lead-sub {
+    margin-top: 16px;
   }
 
   /* Rozwijana lista dziedzin prawa */
@@ -398,6 +404,7 @@ const morePublications = [
   .book-meta {
     font-size: 0.85rem;
     color: var(--color-text-light);
+    white-space: pre-line;
   }
 
   /* Rozwijana sekcja kolejnych publikacji */
