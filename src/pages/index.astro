@@ -10,9 +10,25 @@ import Publikacje from '../components/Publikacje.astro';
 import Kontakt from '../components/Kontakt.astro';
 import Formularz from '../components/Formularz.astro';
 import Footer from '../components/Footer.astro';
+import { SITE } from '../consts';
+
+// Schemat WebSite — powiązanie strony z marką w grafach wiedzy wyszukiwarek.
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#serwis`,
+  url: SITE.url,
+  name: SITE.shortName,
+  inLanguage: SITE.lang,
+  publisher: { '@id': `${SITE.url}/#organizacja` },
+};
 ---
 
-<Layout title="Kancelaria Prawa Gospodarczego i Ubezpieczeniowego Radosław Pacud">
+<Layout
+  title="Kancelaria Prawa Gospodarczego i Ubezpieczeniowego Radosław Pacud — Częstochowa"
+  description="Kancelaria radcy prawnego Radosława Pacuda w Częstochowie. Obsługa prawna przedsiębiorstw, M&A, prawo ubezpieczeniowe, RODO, ochrona sygnalistów i doradztwo IT. Ponad 25 lat doświadczenia, po polsku i angielsku."
+  jsonLd={websiteSchema}
+>
   <Header />
   <Hero />
   <Oferta />

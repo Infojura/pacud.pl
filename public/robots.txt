@@ -1,0 +1,8 @@
+# robots.txt — Kancelaria Prawa Gospodarczego i Ubezpieczeniowego Radosław Pacud
+
+# Wyszukiwarki i asystenci AI — pełny dostęp do treści publicznych.
+User-agent: *
+Allow: /
+
+# Mapa strony
+Sitemap: https://pacud.pl/sitemap-index.xml

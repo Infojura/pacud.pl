@@ -1,0 +1,14 @@
+{
+  "name": "Kancelaria Prawa Gospodarczego i Ubezpieczeniowego Radosław Pacud",
+  "short_name": "Kancelaria Pacud",
+  "description": "Kancelaria radcy prawnego w Częstochowie — obsługa prawna przedsiębiorstw, M&A, ubezpieczenia, RODO.",
+  "lang": "pl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#01023b",
+  "icons": [
+    { "src": "/favicon.png", "type": "image/png", "sizes": "512x512", "purpose": "any" }
+  ]
+}

@@ -1,22 +1,140 @@
 ---
 import '../styles/fonts.css';
 import CookieBanner from '../components/CookieBanner.astro';
+import { SITE, CONTACT, FOUNDER } from '../consts';
 
 interface Props {
   title: string;
+  description?: string;
+  /** Ścieżka do obrazu podglądu (Open Graph). Domyślnie obraz serwisu. */
+  image?: string;
+  /** og:type — 'website' dla stron, 'article' dla treści. */
+  type?: 'website' | 'article';
+  /** Ustaw true, by wykluczyć stronę z indeksowania. */
+  noindex?: boolean;
+  /** Wstrzyknięcie dodatkowego JSON-LD (np. BreadcrumbList) do <head>. */
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = SITE.description,
+  image = SITE.ogImage,
+  type = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+// Absolutne, kanoniczne URL-e (wymagane przez OG oraz roboty AI/wyszukiwarki).
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
+const ogImageURL = new URL(image, Astro.site ?? SITE.url);
+
+// Dane strukturalne organizacji — pojawiają się na każdej stronie i budują
+// wiedzę wyszukiwarek oraz asystentów AI o kancelarii (Knowledge Graph).
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['LegalService', 'Attorney'],
+  '@id': `${SITE.url}/#organizacja`,
+  name: SITE.name,
+  alternateName: SITE.shortName,
+  url: SITE.url,
+  description: SITE.description,
+  image: ogImageURL.href,
+  logo: `${SITE.url}/images/logo.png`,
+  telephone: CONTACT.phone,
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: CONTACT.street,
+    postalCode: CONTACT.postalCode,
+    addressLocality: CONTACT.city,
+    addressRegion: CONTACT.region,
+    addressCountry: CONTACT.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: CONTACT.latitude,
+    longitude: CONTACT.longitude,
+  },
+  areaServed: { '@type': 'Country', name: 'Polska' },
+  availableLanguage: ['pl', 'en'],
+  sameAs: [CONTACT.linkedin],
+  knowsAbout: [
+    'prawo gospodarcze',
+    'prawo ubezpieczeniowe',
+    'fuzje i przejęcia (M&A)',
+    'ochrona danych osobowych (RODO)',
+    'ochrona sygnalistów',
+    'prawo ubezpieczeń społecznych',
+    'doradztwo IT',
+  ],
+  founder: {
+    '@type': 'Person',
+    name: FOUNDER.name,
+    honorificPrefix: FOUNDER.honorificPrefix,
+    jobTitle: FOUNDER.jobTitle,
+  },
+};
+
+const schemas = [orgSchema, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])];
 ---
 
 <!doctype html>
-<html lang="pl">
+<html lang={SITE.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Kancelaria Prawa Gospodarczego i Ubezpieczeniowego Radosław Pacud - Prowadzimy kompleksową obsługę przedsiębiorstw krajowych oraz obrotu zagranicznego w języku polskim i angielskim." />
-    <link rel="icon" type="image/png" href="/favicon.ico" />
+
+    <!-- Podstawowe SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={SITE.keywords.join(', ')} />
+    <meta name="author" content={SITE.name} />
+    <link rel="canonical" href={canonicalURL.href} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
+    <meta name="theme-color" content="#01023b" />
+
+    <!-- Lokalizacja / geo -->
+    <meta name="geo.region" content="PL-24" />
+    <meta name="geo.placename" content={CONTACT.city} />
+    <meta name="geo.position" content={`${CONTACT.latitude};${CONTACT.longitude}`} />
+    <meta name="ICBM" content={`${CONTACT.latitude}, ${CONTACT.longitude}`} />
+
+    <!-- Open Graph (Facebook, LinkedIn, komunikatory) -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE.shortName} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={ogImageURL.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content={SITE.name} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL.href} />
+
+    <!-- Favicony / ikony -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Wskazówka dla asystentów AI (SEO AI) -->
+    <link rel="llms" href="/llms.txt" />
+
+    <!-- Dane strukturalne -->
+    {schemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body>
     <slot />
