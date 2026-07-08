@@ -10,9 +10,35 @@
       <div class="section-divider center"></div>
     </div>
 
-    <!-- Banner -->
-    <div class="projekty-banner-wrap reveal delay-1">
-      <img src="/images/projekty-unijne.png" alt="Projekt unijny B+R — anonimizacja danych osobowych w dokumentach cyfrowych, dofinansowanie UE, Kancelaria Radosław Pacud z INFOJURA" width="1024" height="378" loading="lazy" />
+    <!-- Baner z ciągiem znaków UE / RP / Województwo Śląskie (odtworzony 1:1) -->
+    <div class="eu-banner reveal delay-1">
+      <div class="eu-logos">
+        <img src="/images/fundusze-min.jpg" alt="Fundusze Europejskie — Program Regionalny" loading="lazy" />
+        <img src="/images/polska.jpg" alt="Rzeczpospolita Polska" loading="lazy" />
+        <img src="/images/Logo-slaskie-kolorowe-cmyk.jpg" alt="Województwo Śląskie" loading="lazy" />
+        <img src="/images/UE_EFRR_rgb-1.jpg" alt="Unia Europejska — Europejski Fundusz Rozwoju Regionalnego" loading="lazy" />
+      </div>
+
+      <div class="eu-text">
+        <p class="eu-title">
+          Projekt w ramach Regionalnego Programu Operacyjnego Województwa Śląskiego
+          na lata 2014-2020 (Europejski Fundusz Rozwoju Regionalnego)
+        </p>
+
+        <p class="eu-block">
+          <span>DZIAŁANIE</span>
+          1.2. Badania, rozwój i innowacje w przedsiębiorstwach.
+        </p>
+
+        <p class="eu-block">
+          <span>REALIZACJA PROJEKTU PN.</span>
+          <strong>Technologie automatycznej anonimizacji danych osobowych<br />w dokumentach cyfrowych</strong>
+        </p>
+
+        <p class="eu-footer">
+          Projekt dofinansowany z Regionalnego Programu Operacyjnego Województwa Śląskiego na lata 2014-2020
+        </p>
+      </div>
     </div>
 
     <!-- Content layout -->
@@ -83,16 +109,67 @@
     margin-bottom: 48px;
   }
 
-  .projekty-banner-wrap {
+  /* Baner ze znakami dofinansowania — biała karta, wyśrodkowany układ */
+  .eu-banner {
     margin-bottom: 64px;
+    background: #fff;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    overflow: hidden;
     box-shadow: var(--shadow-md);
+    padding: 40px 48px;
+    text-align: center;
   }
 
-  .projekty-banner-wrap img {
-    width: 100%;
+  .eu-logos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .eu-logos img {
+    height: 84px;
+    width: auto;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  .eu-title {
+    max-width: 760px;
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-navy);
+  }
+
+  .eu-block {
+    margin-top: 26px;
+    line-height: 1.6;
+    color: var(--color-text-light);
+  }
+
+  .eu-block span {
     display: block;
+  }
+
+  .eu-block strong {
+    display: block;
+    margin-top: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .eu-footer {
+    max-width: 720px;
+    margin: 30px auto 0;
+    color: var(--color-text-light);
+    line-height: 1.6;
   }
 
   .projekty-layout {
@@ -225,7 +302,13 @@
     .projekty { padding: 80px 0; }
     .projekty-layout { grid-template-columns: 1fr; gap: 32px; }
     .stats-row { grid-template-columns: 1fr; }
-    .projekty-banner-wrap { margin-bottom: 40px; }
+    .eu-banner { margin-bottom: 40px; padding: 32px 24px; }
+    .eu-logos { gap: 24px 28px; justify-content: center; }
     .desc-card { padding: 28px; }
+  }
+
+  @media (max-width: 560px) {
+    .eu-logos img { height: 56px; }
+    .eu-title { font-size: 1rem; }
   }
 </style>

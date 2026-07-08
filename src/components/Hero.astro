@@ -13,15 +13,8 @@
       </h1>
       <p class="hero-subtitle">
         <svg class="laurel" viewBox="0 0 44 96" aria-hidden="true">
-          <defs>
-            <linearGradient id="laurelGold" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#e2caa0" />
-              <stop offset="0.5" stop-color="#c9a978" />
-              <stop offset="1" stop-color="#b0894f" />
-            </linearGradient>
-          </defs>
-          <g id="laurelBranch" fill="url(#laurelGold)">
-            <path d="M28 92 C 12 76 10 50 16 24 C 18 16 22 10 25 5" fill="none" stroke="url(#laurelGold)" stroke-width="1.6" stroke-linecap="round" />
+          <g id="laurelBranch" fill="#ba9a6c">
+            <path d="M28 92 C 12 76 10 50 16 24 C 18 16 22 10 25 5" fill="none" stroke="#ba9a6c" stroke-width="1.6" stroke-linecap="round" />
             <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(24 86) rotate(-40)" />
             <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(18 72) rotate(-52)" />
             <path d="M0 0 C 3 -4 3 -12 0 -18 C -3 -12 -3 -4 0 0 Z" transform="translate(14 56) rotate(-64)" />
@@ -168,10 +161,7 @@
   .hero-title-line:nth-child(3) { animation-delay: 0.7s; }
 
   .hero-title-accent {
-    background: linear-gradient(135deg, var(--color-primary), #d4b88a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
   }
 
   .hero-divider {
