@@ -54,7 +54,7 @@
     overflow: hidden;
   }
 
-  /* Zdjęcie tła na osobnej warstwie — dzięki temu delikatne odszarzenie
+  /* Zdjęcie tła na osobnej warstwie - dzięki temu delikatne odszarzenie
      (grayscale) dotyczy tylko fotografii, a nie tekstu i złotych akcentów. */
   .hero::before {
     content: '';
@@ -68,7 +68,7 @@
     filter: grayscale(12%);
   }
 
-  /* Przyciemnienie lewej strony — neutralna szarość (bez niebieskiego),
+  /* Przyciemnienie lewej strony - neutralna szarość (bez niebieskiego),
      pod tekstem, z odsłonięciem postaci po prawej */
   .hero-bg-overlay {
     position: absolute;
@@ -164,19 +164,6 @@
     color: var(--color-primary);
   }
 
-  .hero-divider {
-    text-align: left;
-    padding: 4px 0;
-    animation: fadeIn 0.6s ease-out 0.9s both;
-  }
-
-  .hero-divider span {
-    display: inline-block;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-  }
-
   .hero-subtitle {
     display: inline-flex;
     align-items: center;
@@ -214,11 +201,6 @@
     animation: fadeInUp 0.6s ease-out 1.1s both;
   }
 
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: none; }
-  }
-
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: none; }
@@ -250,7 +232,6 @@
     .hero-badge { bottom: 22px; right: 22px; }
     .hero-badge-line { font-size: 0.9rem; }
     .hero-badge-sub { font-size: 0.68rem; letter-spacing: 1px; }
-    .hero-divider { text-align: center; }
     .hero-actions { justify-content: center; }
   }
 

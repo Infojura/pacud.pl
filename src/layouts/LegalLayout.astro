@@ -12,7 +12,7 @@ interface Props {
 
 const { title, updated, description } = Astro.props;
 
-// Ścieżka nawigacyjna (okruszki) — pomaga wyszukiwarkom zrozumieć hierarchię
+// Ścieżka nawigacyjna (okruszki) - pomaga wyszukiwarkom zrozumieć hierarchię
 // i wyświetla breadcrumbs w wynikach.
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -25,7 +25,7 @@ const breadcrumb = {
 ---
 
 <Layout
-  title={`${title} — ${SITE.shortName}`}
+  title={`${title} - ${SITE.shortName}`}
   description={description}
   type="article"
   jsonLd={breadcrumb}

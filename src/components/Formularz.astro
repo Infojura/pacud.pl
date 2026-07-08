@@ -1,15 +1,10 @@
 ---
-// Wysyłka formularza obsługiwana przez Web3Forms (https://web3forms.com) —
-// zgłoszenia trafiają na adres przypisany do klucza (ustaw: sekretariat@pacud.pl).
-// 1. Wejdź na https://web3forms.com, podaj e-mail sekretariat@pacud.pl i skopiuj Access Key.
-// 2. Wklej klucz poniżej w miejsce PLACEHOLDER.
-const WEB3FORMS_ACCESS_KEY = 'PLACEHOLDER-WEB3FORMS-ACCESS-KEY';
+// Wysyłka formularza obsługiwana przez Web3Forms (https://web3forms.com).
+// Klucze (Web3Forms Access Key oraz hCaptcha Site key) są w src/consts.ts → FORM.
+import { FORM } from '../consts';
 
-// Google reCAPTCHA v2 — zabezpieczenie formularza przed spamem.
-// Poniżej PUBLICZNY klucz TESTOWY Google (zawsze przechodzi, wyświetla ostrzeżenie
-// „for testing purposes only"). Przed publikacją podmień na produkcyjny site key
-// (https://www.google.com/recaptcha/admin) i włącz reCAPTCHA w panelu Web3Forms.
-const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+const WEB3FORMS_ACCESS_KEY = FORM.web3formsAccessKey;
+const HCAPTCHA_SITE_KEY = FORM.hcaptchaSiteKey;
 ---
 
 <section class="formularz" id="formularz">
@@ -36,7 +31,7 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
     <form class="formularz-form reveal from-right" id="kontakt-form" novalidate>
       <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-      <input type="hidden" name="subject" value="Nowe zgłoszenie z formularza — pacud.pl" />
+      <input type="hidden" name="subject" value="Nowe zgłoszenie z formularza - pacud.pl" />
       <input type="hidden" name="from_name" value="Formularz KPGIU Radosław Pacud" />
       <!-- Honeypot antyspamowy (ukryty przed użytkownikiem) -->
       <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" />
@@ -76,8 +71,8 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
         </label>
       </div>
 
-      <div class="form-recaptcha">
-        <div class="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY}></div>
+      <div class="form-captcha">
+        <div class="h-captcha" data-sitekey={HCAPTCHA_SITE_KEY}></div>
       </div>
 
       <button type="submit" class="btn btn-primary btn-submit">
@@ -94,9 +89,56 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
   const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status');
 
+  // Prosta, ale skuteczna weryfikacja formatu adresu e-mail.
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  // Zwraca pierwsze niepoprawne pole wraz z komunikatem albo null, gdy wszystko OK.
+  function firstFieldError(f: HTMLFormElement) {
+    const imie = f.querySelector('#imie') as HTMLInputElement;
+    const nazwisko = f.querySelector('#nazwisko') as HTMLInputElement;
+    const telefon = f.querySelector('#telefon') as HTMLInputElement;
+    const email = f.querySelector('#email') as HTMLInputElement;
+    const wiadomosc = f.querySelector('#wiadomosc') as HTMLTextAreaElement;
+
+    [imie, nazwisko, telefon, email, wiadomosc].forEach((el) => el?.classList.remove('invalid'));
+
+    if (!imie.value.trim()) return { field: imie, msg: 'Podaj imię.' };
+    if (!nazwisko.value.trim()) return { field: nazwisko, msg: 'Podaj nazwisko.' };
+
+    if (!telefon.value.trim()) return { field: telefon, msg: 'Podaj numer telefonu.' };
+    const phoneDigits = telefon.value.replace(/\D/g, '');
+    if (phoneDigits.length < 9 || phoneDigits.length > 15) {
+      return { field: telefon, msg: 'Podaj poprawny numer telefonu (9-15 cyfr).' };
+    }
+
+    if (!email.value.trim()) return { field: email, msg: 'Podaj adres e-mail.' };
+    if (!EMAIL_RE.test(email.value.trim())) {
+      return { field: email, msg: 'Podaj poprawny adres e-mail (np. jan@example.com).' };
+    }
+
+    if (!wiadomosc.value.trim()) return { field: wiadomosc, msg: 'Wpisz treść wiadomości.' };
+
+    return null;
+  }
+
+  // Podczas poprawiania pola kasujemy jego oznaczenie błędu.
+  form?.querySelectorAll('input, textarea').forEach((el) => {
+    el.addEventListener('input', () => el.classList.remove('invalid'));
+  });
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!status) return;
+
+    // Weryfikacja poprawności pól: wymagane, format e-maila oraz numeru telefonu.
+    const fieldErr = firstFieldError(form);
+    if (fieldErr) {
+      status.textContent = fieldErr.msg;
+      status.className = 'form-status error';
+      fieldErr.field.classList.add('invalid');
+      fieldErr.field.focus();
+      return;
+    }
 
     // Wymagana zgoda na przetwarzanie danych
     const consent = form.querySelector('#zgoda') as HTMLInputElement | null;
@@ -106,9 +148,9 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
       return;
     }
 
-    // Weryfikacja reCAPTCHA (jeśli widget się załadował)
-    const recaptcha = (window as any).grecaptcha;
-    if (recaptcha && typeof recaptcha.getResponse === 'function' && !recaptcha.getResponse()) {
+    // Weryfikacja hCaptcha (jeśli widget się załadował)
+    const hcaptcha = (window as any).hcaptcha;
+    if (hcaptcha && typeof hcaptcha.getResponse === 'function' && !hcaptcha.getResponse()) {
       status.textContent = 'Potwierdź, że nie jesteś robotem.';
       status.className = 'form-status error';
       return;
@@ -131,7 +173,7 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
         status.textContent = 'Dziękujemy! Wiadomość została wysłana. Odpowiemy tak szybko, jak to możliwe.';
         status.className = 'form-status success';
         form.reset();
-        if (recaptcha && typeof recaptcha.reset === 'function') recaptcha.reset();
+        if (hcaptcha && typeof hcaptcha.reset === 'function') hcaptcha.reset();
       } else {
         status.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub skorzystaj z danych kontaktowych w sekcji „Kontakt".';
         status.className = 'form-status error';
@@ -145,7 +187,7 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
   });
 </script>
 
-<script is:inline async defer src="https://www.google.com/recaptcha/api.js"></script>
+<script is:inline async defer src="https://js.hcaptcha.com/1/api.js"></script>
 
 <style>
   .formularz {
@@ -264,6 +306,12 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     background: rgba(255, 255, 255, 0.08);
   }
 
+  .form-group input.invalid,
+  .form-group textarea.invalid {
+    border-color: #ff9b9b;
+    background: rgba(255, 80, 80, 0.1);
+  }
+
   .form-group textarea {
     resize: vertical;
     min-height: 100px;
@@ -297,7 +345,7 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     text-decoration: underline;
   }
 
-  .form-recaptcha {
+  .form-captcha {
     margin-bottom: 20px;
   }
 
@@ -313,7 +361,7 @@ const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     cursor: not-allowed;
   }
 
-  /* Honeypot — ukryty przed człowiekiem, widoczny dla botów */
+  /* Honeypot - ukryty przed człowiekiem, widoczny dla botów */
   .hp-field {
     position: absolute !important;
     left: -9999px;

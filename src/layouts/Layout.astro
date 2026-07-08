@@ -8,7 +8,7 @@ interface Props {
   description?: string;
   /** Ścieżka do obrazu podglądu (Open Graph). Domyślnie obraz serwisu. */
   image?: string;
-  /** og:type — 'website' dla stron, 'article' dla treści. */
+  /** og:type - 'website' dla stron, 'article' dla treści. */
   type?: 'website' | 'article';
   /** Ustaw true, by wykluczyć stronę z indeksowania. */
   noindex?: boolean;
@@ -29,7 +29,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
 const ogImageURL = new URL(image, Astro.site ?? SITE.url);
 
-// Dane strukturalne organizacji — pojawiają się na każdej stronie i budują
+// Dane strukturalne organizacji - pojawiają się na każdej stronie i budują
 // wiedzę wyszukiwarek oraz asystentów AI o kancelarii (Knowledge Graph).
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -200,7 +200,6 @@ const schemas = [orgSchema, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [json
 
       :root {
         --color-primary: #ba9a6c;
-        --color-primary-dark: #a38656;
         --color-accent: #1c86c6;
         --color-accent-dark: #156da3;
         --color-navy: #01023b;

@@ -1,8 +1,8 @@
 ---
 // Kolejność = częstotliwość wyświetlania (najczęściej pokazywani na początku).
-// Klienci bez pliku logo mają `src: ''` — renderowany jest kafelek tekstowy.
+// Klienci bez pliku logo mają `src: ''` - renderowany jest kafelek tekstowy.
 // Aby dodać logo PRUIM / MAAD: wrzuć plik do public/images i uzupełnij `src`.
-// `initials` (opcjonalne) — monogram dla firm bez pliku logo (src: '').
+// `initials` (opcjonalne) - monogram dla firm bez pliku logo (src: '').
 const clients: { src: string; alt: string; initials?: string }[] = [
   { src: '/images/savangard.jpg', alt: 'Savangard Sp. z o.o. (Warszawa)' },
   { src: '/images/peoplevibe_logo.png', alt: 'PeopleVibe Sp. z o.o. (Warszawa)' },
@@ -76,7 +76,7 @@ const loop = [...clients, ...clients];
     margin: 0 auto 24px;
   }
 
-  /* Karuzela — 3 widoczne jednocześnie, płynne, ciągłe przewijanie */
+  /* Karuzela - 3 widoczne jednocześnie, płynne, ciągłe przewijanie */
   .marquee {
     position: relative;
     max-width: 1200px;
