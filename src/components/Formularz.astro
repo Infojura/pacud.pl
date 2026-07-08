@@ -163,6 +163,10 @@ const HCAPTCHA_SITE_KEY = FORM.hcaptchaSiteKey;
 
     try {
       const data = new FormData(form);
+      // hCaptcha dla kompatybilności dokłada też pole `g-recaptcha-response`. Web3Forms
+      // traktuje jego obecność jako reCAPTCHA (funkcja Pro) i odrzuca zgłoszenie (400),
+      // dlatego usuwamy je — zostaje samo `h-captcha-response` (hCaptcha, plan darmowy).
+      data.delete('g-recaptcha-response');
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { Accept: 'application/json' },
