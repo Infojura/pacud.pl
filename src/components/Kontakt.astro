@@ -57,6 +57,28 @@
         ></iframe>
       </div>
     </div>
+
+    <div class="sygnalista-box reveal">
+      <div class="sygnalista-box-text">
+        <div class="sygnalista-box-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3>Anonimowy sygnalista</h3>
+          <p>Chcesz zgłosić nieprawidłowości anonimowo? Skorzystaj z bezpiecznego panelu zgłoszeń.</p>
+          <p>Napisz do nas, aby poprawić naszą organizację i usługi. Kliknij „+ Utwórz nowe zgłoszenie”.</p>
+        </div>
+      </div>
+      <a
+        class="btn sygnalista-btn"
+        href="https://app.anonyme.pl/report/2b4d2218-3055-43b2-b642-407e108f8f52"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Przejdź do panelu
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -69,6 +91,90 @@
   .kontakt-cta {
     text-align: center;
     margin-bottom: 64px;
+  }
+
+  .sygnalista-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    padding: 32px 40px;
+    background: var(--color-navy);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .sygnalista-box-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .sygnalista-box-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(186, 154, 108, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--color-primary);
+  }
+
+  .sygnalista-box h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .sygnalista-box p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sygnalista-box p + p {
+    margin-top: 8px;
+  }
+
+  .sygnalista-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(186, 154, 108, 0.3);
+  }
+
+  .sygnalista-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(186, 154, 108, 0.45);
+  }
+
+  .sygnalista-btn .arrow {
+    transition: transform 0.2s;
+  }
+
+  .sygnalista-btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 640px) {
+    .sygnalista-box {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 28px 24px;
+    }
+
+    .sygnalista-btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   .kontakt-grid {
