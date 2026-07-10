@@ -6,6 +6,7 @@ const navItems = [
   { label: 'Publikacje', href: '/#publikacje' },
   { label: 'Projekty unijne', href: '/#projekty-unijne' },
   { label: 'Kontakt', href: '/#kontakt' },
+  { label: 'Blog', href: '/blog', highlight: true },
 ];
 ---
 
@@ -26,7 +27,36 @@ const navItems = [
       <div class="nav-links">
         <ul>
           {navItems.map((item) => (
-            <li><a href={item.href}>{item.label}</a></li>
+            <li>
+              {item.highlight ? (
+                <a href={item.href} class="nav-highlight">
+                  <svg class="nav-laurel" viewBox="0 0 44 96" aria-hidden="true">
+                    {/* Liście wygenerowane matematycznie: każdy osadzony dokładnie
+                        na krzywej łodygi, obrócony wg stycznej, malejący ku szczytowi. */}
+                    <g id="laurelNav" fill="currentColor">
+                      <path d="M28 92 C 14 76 11 50 16 24 C 18 15 21 9 25 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(22.8 84.8) rotate(-76.6)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(22.8 84.8) rotate(11.4)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(17 71.2) rotate(-62.4) scale(0.95)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(17 71.2) rotate(25.6) scale(0.95)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(14.1 55.8) rotate(-51.2) scale(0.88)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(14.1 55.8) rotate(36.8) scale(0.88)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(14 39.1) rotate(-42) scale(0.8)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(14 39.1) rotate(46) scale(0.8)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(16.4 22.1) rotate(-32) scale(0.7)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(16.4 22.1) rotate(56) scale(0.7)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(20.4 11.1) rotate(-19.2) scale(0.58)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(20.4 11.1) rotate(68.8) scale(0.58)" />
+                      <path d="M0 0 C 2.8 -4 3.2 -11 0 -18 C -3.2 -11 -2.8 -4 0 0 Z" transform="translate(25 4) rotate(38.7) scale(0.62)" />
+                    </g>
+                  </svg>
+                  <span>{item.label}</span>
+                  <svg class="nav-laurel nav-laurel-flip" viewBox="0 0 44 96" aria-hidden="true"><use href="#laurelNav" /></svg>
+                </a>
+              ) : (
+                <a href={item.href}>{item.label}</a>
+              )}
+            </li>
           ))}
         </ul>
         <a href="/#formularz" class="btn btn-primary nav-cta">Formularz kontaktowy</a>
@@ -88,7 +118,7 @@ const navItems = [
 
   /* Ciemne kolory po scrollowaniu */
   .header.scrolled {
-    background: rgba(255, 255, 255, 0.97);
+    background: rgba(255, 255, 255);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--color-border);
@@ -143,6 +173,7 @@ const navItems = [
 
   .nav-links ul {
     display: flex;
+    align-items: center;
     gap: 2px;
   }
 
@@ -152,6 +183,32 @@ const navItems = [
     font-weight: 500;
     border-radius: var(--radius-sm);
     transition: all 0.2s;
+  }
+
+  /* Wyróżnienie pozycji „Blog" - słowo otoczone gałązkami laurowymi
+     (jak w sekcji Hero), złoty kolor, spójne na obu stanach belki. */
+  .nav-links ul a.nav-highlight,
+  .header.scrolled .nav-links ul a.nav-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+  }
+
+  .nav-links ul a.nav-highlight:hover,
+  .header.scrolled .nav-links ul a.nav-highlight:hover {
+    color: var(--color-primary);
+    background: rgba(186, 154, 108, 0.1);
+  }
+
+  .nav-laurel {
+    height: 20px;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-laurel-flip {
+    transform: scaleX(-1);
   }
 
   .nav-cta {
@@ -228,6 +285,16 @@ const navItems = [
     .nav-links ul a:hover {
       color: var(--color-navy) !important;
       background: var(--color-bg-alt) !important;
+    }
+
+    /* Na mobile: pełna szerokość + separator jak inne pozycje, ze złotym kolorem */
+    .nav-links ul a.nav-highlight {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-primary) !important;
+      border-bottom: 1px solid var(--color-border);
+      font-weight: 700;
     }
 
     .nav-cta {

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ochrona sygnalistów">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#01023b"/>
+      <stop offset="1" stop-color="#0a0b52"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8bd94"/>
+      <stop offset="1" stop-color="#ba9a6c"/>
+    </linearGradient>
+    <pattern id="grid2" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0V46" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg2)"/>
+  <rect width="1200" height="630" fill="url(#grid2)"/>
+  <circle cx="200" cy="110" r="320" fill="#1c86c6" fill-opacity="0.06"/>
+  <circle cx="1060" cy="580" r="260" fill="#ba9a6c" fill-opacity="0.05"/>
+
+  <!-- Ikona: tarcza z symbolem poufności (kłódka) -->
+  <g transform="translate(600 288)" stroke="url(#gold2)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 -108 L104 -70 V16 C104 92 52 132 0 156 C-52 132 -104 92 -104 16 V-70 Z" fill="#ffffff" fill-opacity="0.03"/>
+    <rect x="-40" y="-8" width="80" height="66" rx="12"/>
+    <path d="M-24 -8 V-30 A24 24 0 0 1 24 -30 V-8"/>
+    <circle cx="0" cy="22" r="8" fill="url(#gold2)" stroke="none"/>
+  </g>
+
+  <text x="600" y="512" text-anchor="middle" font-family="'Plus Jakarta Sans',Segoe UI,sans-serif" font-size="30" font-weight="800" letter-spacing="6" fill="url(#gold2)">OCHRONA SYGNALISTÓW</text>
+  <text x="600" y="558" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="500" fill="#ffffff" fill-opacity="0.55">Kancelaria Radosław Pacud</text>
+</svg>

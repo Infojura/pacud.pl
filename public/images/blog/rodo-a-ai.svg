@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="RODO a narzędzia AI">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#01023b"/>
+      <stop offset="1" stop-color="#0a0b52"/>
+    </linearGradient>
+    <linearGradient id="gold3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8bd94"/>
+      <stop offset="1" stop-color="#ba9a6c"/>
+    </linearGradient>
+    <pattern id="grid3" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0V46" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg3)"/>
+  <rect width="1200" height="630" fill="url(#grid3)"/>
+  <circle cx="1000" cy="120" r="340" fill="#1c86c6" fill-opacity="0.07"/>
+  <circle cx="150" cy="540" r="240" fill="#ba9a6c" fill-opacity="0.05"/>
+
+  <!-- Ikona: procesor/AI z tarczą ochrony danych -->
+  <g transform="translate(600 292)" stroke="url(#gold3)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-72" y="-72" width="144" height="144" rx="20" fill="#ffffff" fill-opacity="0.03"/>
+    <rect x="-34" y="-34" width="68" height="68" rx="10"/>
+    <g stroke-width="6">
+      <line x1="-20" y1="-72" x2="-20" y2="-96"/>
+      <line x1="20" y1="-72" x2="20" y2="-96"/>
+      <line x1="-20" y1="72" x2="-20" y2="96"/>
+      <line x1="20" y1="72" x2="20" y2="96"/>
+      <line x1="-72" y1="-20" x2="-96" y2="-20"/>
+      <line x1="-72" y1="20" x2="-96" y2="20"/>
+      <line x1="72" y1="-20" x2="96" y2="-20"/>
+      <line x1="72" y1="20" x2="96" y2="20"/>
+    </g>
+    <path d="M0 -20 L20 -13 V4 C20 19 11 27 0 32 C-11 27 -20 19 -20 4 V-13 Z" fill="url(#gold3)" stroke="none"/>
+  </g>
+
+  <text x="600" y="512" text-anchor="middle" font-family="'Plus Jakarta Sans',Segoe UI,sans-serif" font-size="30" font-weight="800" letter-spacing="6" fill="url(#gold3)">RODO I IT</text>
+  <text x="600" y="558" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="500" fill="#ffffff" fill-opacity="0.55">Kancelaria Radosław Pacud</text>
+</svg>
